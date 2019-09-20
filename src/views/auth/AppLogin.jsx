@@ -53,7 +53,7 @@ class Login extends Form {
             label="Password"
             autoComplete="password"
             placeholder="Password"
-            // error={errors.password}
+            error={errors.email}
             type="password"
           >
             <small id="passwordHelp" className="form-text text-muted">
