@@ -1,13 +1,29 @@
-import React from "react"
+import React, { Component } from "react"
+import { Switch, Route } from "react-router-dom"
+
+import NavigationBar from "./components/navigation/NavigationBar"
+
+import AppRegister from "./views/auth/AppRegister"
+import AppLogin from "./views/auth/AppLogin"
 
 import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">Forum</header>
-    </div>
-  )
+class App extends Component {
+  state = {}
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavigationBar />
+        <main className="container">
+          <Switch>
+            <Route path="/register" component={AppRegister} />
+            <Route path="/login" component={AppLogin} />
+          </Switch>
+        </main>
+      </React.Fragment>
+    )
+  }
 }
 
 export default App
