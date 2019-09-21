@@ -1,5 +1,6 @@
 import React from "react"
 import Joi from "joi-browser"
+import { Redirect } from "react-router-dom"
 
 import userService from "./../../utils/services/user-service"
 
@@ -11,8 +12,12 @@ class Register extends Form {
     data: {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      password_confirmation: ""
     },
+
+    toLogin: false,
+
     errors: {}
   }
 
@@ -36,6 +41,10 @@ class Register extends Form {
 
   render() {
     const { data, errors } = this.state
+
+    if (this.state.toLogin === true) {
+      return <Redirect to="/login" />
+    }
 
     return (
       <div className="content">
@@ -101,7 +110,10 @@ class Register extends Form {
 
   doSubmit = async () => {
     try {
-      await userService.register(this.state.data)
+      await userService
+        .register(this.state.data)
+        // PUSH DATA TO LOGIN
+        .then(() => this.setState(() => ({ toLogin: true })))
     } catch (e) {
       if (e.response && e.response.status === 400) {
         const errors = { ...this.state.errors }

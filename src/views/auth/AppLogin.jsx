@@ -1,5 +1,6 @@
 import React from "react"
 import Joi from "joi-browser"
+import { Redirect } from "react-router-dom"
 
 import authService from "./../../utils/services/auth-service"
 
@@ -12,6 +13,9 @@ class Login extends Form {
       email: "",
       password: ""
     },
+
+    toDashboard: false,
+
     errors: []
   }
 
@@ -27,6 +31,10 @@ class Login extends Form {
 
   render() {
     const { data, errors } = this.state
+
+    if (this.state.toDashboard === true) {
+      return <Redirect to="/dashboard" />
+    }
 
     return (
       <div className="content">
@@ -69,7 +77,9 @@ class Login extends Form {
 
   doSubmit = async () => {
     try {
-      await authService.login(this.state.data)
+      await authService
+        .login(this.state.data)
+        .then(() => this.setState(() => ({ toDashboard: true })))
     } catch (e) {
       if (e) {
         const newError = e.response.data
