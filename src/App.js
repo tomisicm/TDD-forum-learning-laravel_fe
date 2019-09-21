@@ -3,8 +3,10 @@ import { Switch, Route } from "react-router-dom"
 
 import NavigationBar from "./components/navigation/NavigationBar"
 
-import AppRegister from "./views/auth/AppRegister"
-import AppLogin from "./views/auth/AppLogin"
+import AppRegister from "./screens/auth/AppRegister"
+import AppLogin from "./screens/auth/AppLogin"
+
+import Threads from "./screens/thread/Threads"
 
 import "./App.css"
 
@@ -17,8 +19,9 @@ class App extends Component {
         <NavigationBar />
         <main className="container">
           <Switch>
-            <Route path="/auth/register" component={AppRegister} />
-            <Route path="/auth/login" component={AppLogin} />
+            <Route exact path="/auth/register" component={AppRegister} />
+            <Route exact path="/auth/login" component={AppLogin} />
+            <Route path="/" component={Threads} />
           </Switch>
         </main>
       </React.Fragment>
