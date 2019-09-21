@@ -42,9 +42,7 @@ const NavigationBar = props => {
                     channels.map(item => (
                       <NavDropdown.Item
                         key={item.name}
-                        to={{
-                          pathname: `/channel/${item.name}/threads`
-                        }}
+                        href={`/channel/${item.name}/threads`}
                       >
                         {item.name}
                       </NavDropdown.Item>

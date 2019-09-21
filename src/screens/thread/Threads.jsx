@@ -14,7 +14,30 @@ class Threads extends Component {
   }
 
   render() {
-    return <div>Threads for the given channel!</div>
+    const { threads } = this.state
+
+    return (
+      <div className="container-fluid my-3">
+        {threads &&
+          threads.map(item => (
+            <div className="card my-2" key={item.id}>
+              <div className="card-header">
+                <div className="row justify-content">
+                  <div className="col-md-8">{item.title}</div>
+                  <div className="col">{item.creator.name}</div>
+                </div>
+              </div>
+              <div className="card-body" style={{ padding: "0.5rem" }}>
+                <div className="card-text">{item.body}</div>
+                <div className="row">
+                  <div className="col">Replies: {item.replies_count}</div>
+                  <div className="col">Updated At: {item.updated_at}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+      </div>
+    )
   }
 }
 
