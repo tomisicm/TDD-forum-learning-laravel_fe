@@ -42,7 +42,7 @@ const NavigationBar = props => {
                   <NavDropdown.Item>Channel 2</NavDropdown.Item> */}
                   {channels &&
                     channels.map(item => (
-                      <NavDropdown.Item key={item._id || item.id}>
+                      <NavDropdown.Item href={item.name} key={item.name}>
                         {item.name}
                       </NavDropdown.Item>
                     ))}
@@ -56,8 +56,10 @@ const NavigationBar = props => {
               <NavDropdown title={user && user.name ? user.name : "Login"}>
                 {!user && (
                   <React.Fragment>
-                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                    <NavDropdown.Item href="/register">
+                    <NavDropdown.Item href="/auth/login">
+                      Login
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/auth/register">
                       Register
                     </NavDropdown.Item>
                   </React.Fragment>

@@ -17,8 +17,8 @@ class App extends Component {
         <NavigationBar />
         <main className="container">
           <Switch>
-            <Route path="/register" component={AppRegister} />
-            <Route path="/login" component={AppLogin} />
+            <Route path="/auth/register" component={AppRegister} />
+            <Route path="/auth/login" component={AppLogin} />
           </Switch>
         </main>
       </React.Fragment>
