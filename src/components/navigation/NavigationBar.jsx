@@ -38,8 +38,6 @@ const NavigationBar = props => {
                   <NavDropdown.Item>My threads</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Channels" className="col-4">
-                  {/* <NavDropdown.Item>Channel 1</NavDropdown.Item>
-                  <NavDropdown.Item>Channel 2</NavDropdown.Item> */}
                   {channels &&
                     channels.map(item => (
                       <NavDropdown.Item href={item.name} key={item.name}>
