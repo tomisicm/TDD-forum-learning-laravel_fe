@@ -45,7 +45,6 @@ const NavigationBar = props => {
                         to={{
                           pathname: `/channel/${item.name}/threads`
                         }}
-                        className="row ml-2"
                       >
                         {item.name}
                       </NavDropdown.Item>
