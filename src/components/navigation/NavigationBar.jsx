@@ -1,12 +1,22 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
 
-const NavigationBar = props => {
-  // const { user } = props
+import channelsService from "../../utils/services/channels-service"
 
+const NavigationBar = props => {
+  const [state, setChannels] = useState({ channels: [] })
+  // const { user } = props
   const user = null
+
+  useEffect(() => {
+    channelsService.getChannels().then(({ data }) => {
+      setChannels({ channels: data })
+    })
+  }, [])
+
+  const { channels } = state
 
   return (
     <Container>
@@ -28,8 +38,14 @@ const NavigationBar = props => {
                   <NavDropdown.Item>My threads</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Channels" className="col-4">
-                  <NavDropdown.Item>Channel 1</NavDropdown.Item>
-                  <NavDropdown.Item>Channel 2</NavDropdown.Item>
+                  {/* <NavDropdown.Item>Channel 1</NavDropdown.Item>
+                  <NavDropdown.Item>Channel 2</NavDropdown.Item> */}
+                  {channels &&
+                    channels.map(item => (
+                      <NavDropdown.Item key={item._id || item.id}>
+                        {item.name}
+                      </NavDropdown.Item>
+                    ))}
                 </NavDropdown>
                 <Nav.Link className="col-4">New Thread</Nav.Link>
               </div>
