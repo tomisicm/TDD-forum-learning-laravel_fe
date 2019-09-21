@@ -21,7 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/auth/register" component={AppRegister} />
             <Route exact path="/auth/login" component={AppLogin} />
-            <Route path="/" component={Threads} />
+            <Route path="/channel/:channel/threads" component={Threads} />
           </Switch>
         </main>
       </React.Fragment>
