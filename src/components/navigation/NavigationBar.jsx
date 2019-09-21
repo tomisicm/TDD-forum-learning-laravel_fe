@@ -21,17 +21,17 @@ const NavigationBar = props => {
           <div className="col-8">
             <Nav className="mr-auto">
               <div className="row">
-                <NavDropdown title="Browse" className="col-4">
-                  <NavDropdown.Item>Action</NavDropdown.Item>
-                  <NavDropdown.Item>Action 2</NavDropdown.Item>
+                <NavDropdown title="Threads" className="col-4">
+                  <NavDropdown.Item>By me</NavDropdown.Item>
+                  <NavDropdown.Item>Unanswered</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item>Action 3</NavDropdown.Item>
+                  <NavDropdown.Item>My threads</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link className="col-4">New Thread</Nav.Link>
                 <NavDropdown title="Channels" className="col-4">
                   <NavDropdown.Item>Channel 1</NavDropdown.Item>
                   <NavDropdown.Item>Channel 2</NavDropdown.Item>
                 </NavDropdown>
+                <Nav.Link className="col-4">New Thread</Nav.Link>
               </div>
             </Nav>
           </div>
