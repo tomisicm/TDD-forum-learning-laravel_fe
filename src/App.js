@@ -29,8 +29,8 @@ class App extends Component {
               path="/channel/:channel/threads"
               component={ChannelThreads}
             />
-            <Route path="/threads" component={Threads} />
             <Route path="/threads/:thread" component={Thread} />
+            <Route path="/threads" component={Threads} />
             <Route path="/profile/:profile" component={Profile} />
           </Switch>
         </main>

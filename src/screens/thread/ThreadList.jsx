@@ -31,7 +31,7 @@ class Threads extends Component {
                     <Link to={`/threads/${item.id}`}>{item.title}</Link>
                   </div>
                   <div className="col">
-                    <Link to={`/profiles/${item.creator.name}`}>
+                    <Link to={`/profile/${item.creator.name}`}>
                       {item.creator.name}
                     </Link>
                   </div>

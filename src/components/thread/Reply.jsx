@@ -34,7 +34,7 @@ class Reply extends Form {
           <div className="card-header">
             <div className="row justify-content">
               <div className="col">
-                <Link to={`/profiles/${reply.creator.name}`}>
+                <Link to={`/profile/${reply.creator.name}`}>
                   {reply.creator.name}
                 </Link>
               </div>

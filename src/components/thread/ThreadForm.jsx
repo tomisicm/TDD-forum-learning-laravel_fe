@@ -37,7 +37,7 @@ class ThreadForm extends Form {
               {/* TODO: Remove current user is user */}
               {thread.creator && (
                 <div className="col">
-                  <Link to={`/profiles/${thread.creator.name}`}>
+                  <Link to={`/profile/${thread.creator.name}`}>
                     Author: {thread.creator.name}
                   </Link>
                 </div>
