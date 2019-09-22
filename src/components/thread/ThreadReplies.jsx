@@ -4,6 +4,7 @@ import ThreadReply from "../../components/thread/ThreadReply"
 
 class ThreadReplies extends Component {
   state = {}
+
   render() {
     const { replies } = this.props
 
