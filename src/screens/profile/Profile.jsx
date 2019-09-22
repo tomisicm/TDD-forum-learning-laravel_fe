@@ -14,12 +14,9 @@ class Profile extends Component {
         window.location.pathname.replace("/channel", "") +
           window.location.search
       )
-      .then(
-        ({ data }) =>
-          this.setState({ profile: data.user, activities: data.activities })
-        // console.log(data)
+      .then(({ data }) =>
+        this.setState({ profile: data.user, activities: data.activities })
       )
-    console.log(this.state)
   }
 
   render() {
