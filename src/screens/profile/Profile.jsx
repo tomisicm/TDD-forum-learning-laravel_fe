@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 
 import profileService from "../../utils/services/profile-service"
 
@@ -37,10 +38,13 @@ class Profile extends Component {
               Object.keys(activities).map(entry => (
                 <div key={entry}>
                   {entry}
-
+                  {/* TODO: entry is a collapse element */}
                   {activities[entry].map(item => (
                     <div className="ml-3" key={item.id}>
-                      - {item.type}
+                      - {item.type}{" "}
+                      <Link to={`/threads/${item.subject.id}`}>
+                        {item.subject.title}
+                      </Link>
                     </div>
                   ))}
                   <hr />
