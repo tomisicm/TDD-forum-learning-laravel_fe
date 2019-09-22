@@ -34,7 +34,11 @@ class Profile extends Component {
           <div>
             {activities &&
               Object.keys(activities).map(entry => (
-                <div>{JSON.stringify(activities[entry])}</div>
+                <div>
+                  {activities[entry].map(item => (
+                    <div>{item.type}</div>
+                  ))}
+                </div>
               ))}
           </div>
         </div>
