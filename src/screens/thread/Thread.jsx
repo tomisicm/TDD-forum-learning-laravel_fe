@@ -35,14 +35,30 @@ class Thread extends Component {
                 </div>
               </div>
               <div className="card-body" style={{ padding: "0.5rem" }}>
-                <div className="card-text">{thread.body}</div>
-                <div className="row">
-                  <div className="col">Replies: {thread.replies_count}</div>
-                  <div className="col">Updated At: {thread.updated_at}</div>
+                <div className="card-text my-3">{thread.body}</div>
+              </div>
+              <div className="card-footer">
+                <div className="row text-muted">
+                  <div className="col-md-4">
+                    Total replies: {thread.replies_count}
+                  </div>
+                  <div className="col mr-auto">
+                    Last Update: {thread.updated_at}
+                  </div>
+                  {/* TODO: Remove if user */}
+                  <div className="col-auto">
+                    <button type="button" class="btn btn-primary mx-2">
+                      Edit
+                    </button>
+                    <button type="button" class="btn btn-danger mx-2">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           )}
+
           <div className="mx-2">
             {thread.replies &&
               thread.replies.map(item => (
@@ -58,6 +74,15 @@ class Thread extends Component {
                   </div>
                   <div className="card-body" style={{ padding: "0.5rem" }}>
                     <div className="card-text">{item.body}</div>
+                  </div>
+                  {/* TODO: Remove if user */}
+                  <div className="card-footer">
+                    <button type="button" class="btn-sm btn-primary mx-2">
+                      Edit
+                    </button>
+                    <button type="button" class="btn-sm btn-danger mx-2">
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))}
