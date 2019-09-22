@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
+import replyService from "../../utils/services/replies-service"
+
 import Form from "../../components/common/Form"
 
 class Reply extends Form {
@@ -40,32 +42,33 @@ class Reply extends Form {
           <div className="card-body" style={{ padding: "0.5rem" }}>
             <div className="card-text">{reply.body}</div>
           </div>
-          {/* TODO: Remove if user */}
-          <div className="card-footer">
-            {!formEditState && (
-              <React.Fragment>
+          {user && (
+            <div className="card-footer">
+              {!formEditState && (
+                <React.Fragment>
+                  <button
+                    onClick={() => this.toggleEditState()}
+                    type="button"
+                    className="btn-sm btn-primary mx-2"
+                  >
+                    Edit
+                  </button>
+                  <button type="button" className="btn-sm btn-danger mx-2">
+                    Delete
+                  </button>
+                </React.Fragment>
+              )}
+              {formEditState && (
                 <button
-                  onClick={() => this.toggleEditState()}
+                  onClick={() => this.handleSave()}
                   type="button"
-                  className="btn-sm btn-primary mx-2"
+                  className="btn-sm btn-success mx-2"
                 >
-                  Edit
+                  Save
                 </button>
-                <button type="button" className="btn-sm btn-danger mx-2">
-                  Delete
-                </button>
-              </React.Fragment>
-            )}
-            {formEditState && (
-              <button
-                onClick={() => this.handleSave()}
-                type="button"
-                className="btn-sm btn-success mx-2"
-              >
-                Save
-              </button>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </React.Fragment>
     )
