@@ -6,7 +6,7 @@ import NavigationBar from "./components/navigation/NavigationBar"
 import AppRegister from "./screens/auth/AppRegister"
 import AppLogin from "./screens/auth/AppLogin"
 
-import Threads from "./screens/thread/Threads"
+import Threads from "./screens/thread/ThreadList"
 import Thread from "./screens/thread/Thread"
 
 import "./App.css"
