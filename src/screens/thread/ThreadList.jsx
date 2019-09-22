@@ -10,7 +10,10 @@ class Threads extends Component {
 
   componentDidMount() {
     threadService
-      .getThreads(window.location.pathname.replace("/channel", ""))
+      .getThreads(
+        window.location.pathname.replace("/channel", "") +
+          window.location.search
+      )
       .then(({ data }) => this.setState({ threads: data }))
   }
 
