@@ -32,16 +32,16 @@ class Profile extends Component {
             </div>
           </div>
           <div>
-            {activities.length > 0 &&
-              Object.keys(activities).map(item => {
-                return item.toString()
-              })}
+            {activities &&
+              Object.keys(activities).forEach(entry =>
+                console.log(activities[entry])
+              )}
           </div>
-          {console.log(
+          {/* {console.log(
             Object.keys(activities).map(item => {
               return item.toString()
             })
-          )}
+          )} */}
           {/* <div>{JSON.stringify(activities)}</div> */}
         </div>
       </div>
