@@ -7,6 +7,7 @@ import AppRegister from "./screens/auth/AppRegister"
 import AppLogin from "./screens/auth/AppLogin"
 
 import Threads from "./screens/thread/Threads"
+import Thread from "./screens/thread/Thread"
 
 import "./App.css"
 
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/auth/register" component={AppRegister} />
             <Route exact path="/auth/login" component={AppLogin} />
             <Route path="/channel/:channel/threads" component={Threads} />
+            <Route path="/threads/:thread" component={Thread} />
           </Switch>
         </main>
       </React.Fragment>

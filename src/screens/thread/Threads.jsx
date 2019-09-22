@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 
 import threadService from "../../utils/services/thread-service"
 
@@ -23,8 +24,14 @@ class Threads extends Component {
             <div className="card my-2" key={item.id}>
               <div className="card-header">
                 <div className="row justify-content">
-                  <div className="col-md-8">{item.title}</div>
-                  <div className="col">{item.creator.name}</div>
+                  <div className="col-md-8">
+                    <Link to={`/threads/${item.id}`}>{item.title}</Link>
+                  </div>
+                  <div className="col">
+                    <Link to={`/profiles/${item.creator.name}`}>
+                      {item.creator.name}
+                    </Link>
+                  </div>
                 </div>
               </div>
               <div className="card-body" style={{ padding: "0.5rem" }}>
