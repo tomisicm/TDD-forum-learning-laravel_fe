@@ -31,13 +31,19 @@ class Profile extends Component {
               <div className="col">{profile.email}</div>
             </div>
           </div>
-          <div>
+          <div className="card-body ml-2">
+            <div className="row">Activities:</div>
             {activities &&
               Object.keys(activities).map(entry => (
-                <div>
+                <div key={entry}>
+                  {entry}
+
                   {activities[entry].map(item => (
-                    <div>{item.type}</div>
+                    <div className="ml-3" key={item.id}>
+                      - {item.type}
+                    </div>
                   ))}
+                  <hr />
                 </div>
               ))}
           </div>
