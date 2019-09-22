@@ -21,10 +21,29 @@ class Profile extends Component {
 
   render() {
     const { profile, activities } = this.state
+
     return (
       <div className="container-fluid my-3">
-        <div>{JSON.stringify(profile)}</div>
-        <div>{JSON.stringify(activities)}</div>
+        <div className="card my-2">
+          <div className="card-header">
+            <div className="row ml-3">
+              <div className="col">{profile.name}</div>
+              <div className="col">{profile.email}</div>
+            </div>
+          </div>
+          <div>
+            {activities.length > 0 &&
+              Object.keys(activities).map(item => {
+                return item.toString()
+              })}
+          </div>
+          {console.log(
+            Object.keys(activities).map(item => {
+              return item.toString()
+            })
+          )}
+          {/* <div>{JSON.stringify(activities)}</div> */}
+        </div>
       </div>
     )
   }
