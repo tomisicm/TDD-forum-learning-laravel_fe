@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 import Form from "../../components/common/Form"
 
-class ThreadReply extends Form {
+class Reply extends Form {
   state = {
     formEditState: false
   }
@@ -72,4 +72,4 @@ class ThreadReply extends Form {
   }
 }
 
-export default ThreadReply
+export default Reply

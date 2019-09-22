@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import ThreadReply from "../../components/thread/ThreadReply"
+import ThreadReply from "../../components/thread/Reply"
 
 class ThreadReplies extends Component {
   state = {}
