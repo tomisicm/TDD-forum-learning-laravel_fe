@@ -20,6 +20,7 @@ class ThreadForm extends Form {
     // async call
     this.toggleEditState()
   }
+
   render() {
     const { thread } = this.props
     const { formEditState } = this.state
@@ -82,7 +83,7 @@ class ThreadForm extends Form {
                   <button
                     onClick={() => this.handleSave()}
                     type="button"
-                    className="btn btn-danger mx-2"
+                    className="btn btn-success mx-2"
                   >
                     Save
                   </button>

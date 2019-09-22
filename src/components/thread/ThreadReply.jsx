@@ -1,11 +1,29 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
-class ThreadReply extends Component {
-  state = {}
+import Form from "../../components/common/Form"
+
+class ThreadReply extends Form {
+  state = {
+    formEditState: false
+  }
+
+  toggleEditState() {
+    this.setState({ formEditState: !this.state.formEditState })
+  }
+
+  handleDelete() {
+    console.log(this.props.thread.id)
+  }
+
+  handleSave() {
+    // async call
+    this.toggleEditState()
+  }
 
   render() {
-    const { reply } = this.props
+    const { reply, user } = this.props
+    const { formEditState } = this.state
 
     return (
       <React.Fragment>
@@ -24,12 +42,29 @@ class ThreadReply extends Component {
           </div>
           {/* TODO: Remove if user */}
           <div className="card-footer">
-            <button type="button" className="btn-sm btn-primary mx-2">
-              Edit
-            </button>
-            <button type="button" className="btn-sm btn-danger mx-2">
-              Delete
-            </button>
+            {!formEditState && (
+              <React.Fragment>
+                <button
+                  onClick={() => this.toggleEditState()}
+                  type="button"
+                  className="btn-sm btn-primary mx-2"
+                >
+                  Edit
+                </button>
+                <button type="button" className="btn-sm btn-danger mx-2">
+                  Delete
+                </button>
+              </React.Fragment>
+            )}
+            {formEditState && (
+              <button
+                onClick={() => this.handleSave()}
+                type="button"
+                className="btn-sm btn-success mx-2"
+              >
+                Save
+              </button>
+            )}
           </div>
         </div>
       </React.Fragment>
