@@ -2,7 +2,7 @@ import React from "react"
 import Joi from "joi-browser"
 import { Redirect } from "react-router-dom"
 
-import userService from "./../../utils/services/user-service"
+import authService from "./../../utils/services/auth-service"
 
 import Form from "../../components/common/Form"
 import BaseInput from "./../../components/common/Input"
@@ -110,7 +110,7 @@ class Register extends Form {
 
   doSubmit = async () => {
     try {
-      await userService
+      await authService
         .register(this.state.data)
         // PUSH DATA TO LOGIN
         .then(() => this.setState(() => ({ toLogin: true })))

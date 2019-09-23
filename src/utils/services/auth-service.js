@@ -13,6 +13,10 @@ class AuthService {
   async logout() {
     localStorage.removeItem("jwt")
   }
+
+  register(body) {
+    return http.post("/register", body)
+  }
 }
 
 export const getCurrentUser = () => {
