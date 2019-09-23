@@ -5,7 +5,7 @@ import Form from "../../components/common/Form"
 
 class ThreadForm extends Form {
   state = {
-    formEditState: false
+    formEditState: this.props.formEditState
   }
 
   toggleEditState() {
@@ -18,7 +18,15 @@ class ThreadForm extends Form {
 
   handleSave() {
     // async call
+    // if new object then redirect on view page
+    // otherviwe user is already on the /threads/:id page
     this.toggleEditState()
+  }
+
+  getDefaultProps() {
+    return {
+      formEditState: false
+    }
   }
 
   render() {

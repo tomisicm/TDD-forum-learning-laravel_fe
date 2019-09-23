@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import threadService from "../../utils/services/thread-service"
+// import threadService from "../../utils/services/thread-service"
 
 import ThreadForm from "../../components/thread/ThreadForm"
 
