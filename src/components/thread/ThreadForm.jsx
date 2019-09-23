@@ -8,6 +8,10 @@ class ThreadForm extends Form {
     formEditState: this.props.formEditState
   }
 
+  static defaultProps = {
+    formEditState: false
+  }
+
   toggleEditState() {
     this.setState({ formEditState: !this.state.formEditState })
   }
@@ -21,12 +25,6 @@ class ThreadForm extends Form {
     // if new object then redirect on view page
     // otherviwe user is already on the /threads/:id page
     this.toggleEditState()
-  }
-
-  getDefaultProps() {
-    return {
-      formEditState: false
-    }
   }
 
   render() {
