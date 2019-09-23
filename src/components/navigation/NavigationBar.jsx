@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
+import { connect } from "react-redux"
 
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
 
 import channelsService from "../../utils/services/channels-service"
 
-const NavigationBar = props => {
+const mapStateToProps = state => {
+  return { user: state.user }
+}
+
+const NavBar = ({ user }) => {
   const [state, setChannels] = useState({ channels: [] })
-  // const { user } = props
-  const user = null
 
   useEffect(() => {
     channelsService.getChannels().then(({ data }) => {
@@ -54,7 +57,7 @@ const NavigationBar = props => {
           </div>
           <div className="col-2">
             <Nav className="justify-content-end">
-              <NavDropdown title={user && user.name ? user.name : "Login"}>
+              <NavDropdown title={user && user.email ? user.email : "Login"}>
                 {!user && (
                   <React.Fragment>
                     <NavDropdown.Item href="/auth/login">
@@ -79,5 +82,7 @@ const NavigationBar = props => {
     </Container>
   )
 }
+
+const NavigationBar = connect(mapStateToProps)(NavBar)
 
 export default NavigationBar
