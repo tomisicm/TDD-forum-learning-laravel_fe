@@ -4,6 +4,8 @@ import { connect } from "react-redux"
 
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
 
+import _ from "lodash"
+
 import channelsService from "../../utils/services/channels-service"
 
 const mapStateToProps = state => {
@@ -58,7 +60,7 @@ const NavBar = ({ user }) => {
           <div className="col-2">
             <Nav className="justify-content-end">
               <NavDropdown title={user && user.email ? user.email : "Login"}>
-                {!user && (
+                {_.isEmpty(user) && (
                   <React.Fragment>
                     <NavDropdown.Item href="/auth/login">
                       Login
@@ -68,7 +70,7 @@ const NavBar = ({ user }) => {
                     </NavDropdown.Item>
                   </React.Fragment>
                 )}
-                {user && (
+                {!_.isEmpty(user) && (
                   <React.Fragment>
                     <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                     <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
