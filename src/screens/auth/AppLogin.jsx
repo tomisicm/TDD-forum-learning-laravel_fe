@@ -1,8 +1,11 @@
 import React from "react"
-import Joi from "joi-browser"
 import { Redirect } from "react-router-dom"
+import { connect } from "react-redux"
+
+import Joi from "joi-browser"
 
 import authService from "./../../utils/services/auth-service"
+import { fetchCurrentUser } from "../../redux/actions/userAction"
 
 import Form from "../../components/common/Form"
 import BaseInput from "./../../components/common/Input"
@@ -79,6 +82,7 @@ class Login extends Form {
     try {
       await authService
         .login(this.state.data)
+        .then(this.props.fetchCurrentUser())
         .then(() => this.setState(() => ({ toDashboard: true })))
     } catch (e) {
       if (e) {
@@ -92,4 +96,7 @@ class Login extends Form {
   }
 }
 
-export default Login
+export default connect(
+  null,
+  { fetchCurrentUser }
+)(Login)

@@ -1,6 +1,6 @@
 import http from "./http-service"
 
-import jwtDecode from "jwt-decode"
+// import jwtDecode from "jwt-decode"
 
 class AuthService {
   async login(body) {

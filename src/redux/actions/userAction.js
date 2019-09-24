@@ -1,5 +1,12 @@
 import { FETCH_CURRENT_USER } from "../constants"
+import userService from "../../utils/services/user-service"
 
-export function fetchCurrentUser(payload) {
-  return { type: FETCH_CURRENT_USER, payload }
+export function fetchCurrentUser() {
+  return async function(dispatch, getState) {
+    const { data } = await userService.getCurrentUser()
+
+    console.log(data)
+
+    dispatch({ type: FETCH_CURRENT_USER, data })
+  }
 }

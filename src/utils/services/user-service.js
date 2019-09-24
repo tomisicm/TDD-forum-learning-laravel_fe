@@ -2,7 +2,7 @@ import http from "./http-service"
 
 class UserService {
   getCurrentUser() {
-    return http.get("/me")
+    return http.get("/api/me")
   }
 }
 
