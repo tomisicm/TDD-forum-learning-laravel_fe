@@ -6,7 +6,9 @@ const initialState = {
 
 function userReducer(state = initialState, action) {
   if (action.type === FETCH_CURRENT_USER) {
-    state = Object.assign({}, state, action.payload)
+    state = Object.assign({}, state, { user: action.data })
+
+    return state
   }
 
   return state
