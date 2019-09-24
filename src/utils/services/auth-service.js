@@ -10,12 +10,20 @@ class AuthService {
     // localStorage.setItem("user", JSON.stringify(jwtDecode(jwt.token)))
   }
 
-  async logout() {
+  register(body) {
+    return http.post("/api/register", body)
+  }
+
+  logout() {
     localStorage.removeItem("jwt")
   }
 
-  register(body) {
-    return http.post("/api/register", body)
+  setAuthHeaders(token) {
+    if (!token) {
+      delete http.defaults.headers.common["Authorization"]
+      return
+    }
+    return (http.defaults.headers.common["Authorization"] = `${token}`)
   }
 }
 
@@ -23,9 +31,9 @@ export const getCurrentUser = () => {
   try {
     const user = localStorage.getItem("user")
 
-    return jwtDecode(user)
+    return user
   } catch (error) {
-    return null
+    throw error
   }
 }
 
@@ -34,10 +42,23 @@ export function getJwt() {
     const jwt = localStorage.getItem("jwt")
 
     if (jwt) return JSON.parse(jwt).type + " " + JSON.parse(jwt).token
-    return ""
-  } catch (error) {}
+
+    return null
+  } catch (error) {
+    throw error
+  }
+}
+
+const checkToken = service => {
+  let token = getJwt()
+
+  if (token) {
+    service.setAuthHeaders(token)
+  }
 }
 
 const authService = new AuthService()
+
+checkToken(authService)
 
 export default authService
