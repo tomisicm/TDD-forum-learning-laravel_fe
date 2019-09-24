@@ -5,8 +5,6 @@ export function fetchCurrentUser() {
   return async function(dispatch, getState) {
     const { data } = await userService.getCurrentUser()
 
-    console.log(data)
-
-    dispatch({ type: FETCH_CURRENT_USER, data })
+    dispatch({ type: FETCH_CURRENT_USER, payload: data })
   }
 }
