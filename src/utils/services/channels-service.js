@@ -2,7 +2,7 @@ import http from "./http-service"
 
 class ChannelsService {
   getChannels() {
-    return http.get("/channels")
+    return http.get("api/channels")
   }
 }
 
