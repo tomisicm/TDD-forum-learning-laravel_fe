@@ -78,11 +78,11 @@ class Login extends Form {
     )
   }
 
-  doSubmit = async () => {
+  doSubmit = () => {
     try {
-      await authService
+      authService
         .login(this.state.data)
-        .then(this.props.fetchCurrentUser())
+        .then(() => this.props.fetchCurrentUser())
         .then(() => this.setState(() => ({ toDashboard: true })))
     } catch (e) {
       const newError = e.response.data
