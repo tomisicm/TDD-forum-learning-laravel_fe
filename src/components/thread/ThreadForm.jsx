@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
 import Form from "../../components/common/Form"
-// import BaseInput from "./../../components/common/Input"
+import BaseInput from "./../../components/common/Input"
 
 const mapStateToProps = state => {
   return { user: state.user }
@@ -40,12 +40,16 @@ class ThreadForm extends Form {
 
     return (
       <React.Fragment>
-        <div className="card my-2" key={thread.id}>
+        <div className="card my-2 w-100" key={thread.id}>
           <div className="card-header">
             <div className="row justify-content">
               <div className="col-md-8">
                 {!formEditState && <span>Title: {thread.title}</span>}
-                {formEditState && <div>INSERT INPUT</div>}
+                {formEditState && (
+                  <div>
+                    <BaseInput name="title" label="Title:" classes="ml-3" />
+                  </div>
+                )}
               </div>
 
               {thread.creator && (

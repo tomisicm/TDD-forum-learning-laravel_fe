@@ -3,6 +3,7 @@ import propTypes from "prop-types"
 
 const Input = props => {
   const {
+    classes,
     name,
     type = "text",
     label,
@@ -23,7 +24,7 @@ const Input = props => {
         value={value}
         onChange={onChange}
         name={name}
-        className="form-control"
+        className={classes || "form-control"}
         id={name}
         placeholder={placeholder}
         autoComplete={autoComplete}
@@ -43,6 +44,7 @@ const Input = props => {
 // TO DO: additional .on-input-error ( reduce the size of alert elements )
 
 Input.propTypes = {
+  fieldClasses: propTypes.string,
   value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
   name: propTypes.string.isRequired,
   label: propTypes.string.isRequired,
