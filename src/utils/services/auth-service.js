@@ -6,8 +6,8 @@ class AuthService {
   async login(body) {
     return http
       .post("/api/login", body)
-      .then(response => {
-        this.loggingIn(response.data)
+      .then(({ data }) => {
+        this.loggingIn(data)
       })
       .catch(error => {
         throw error
