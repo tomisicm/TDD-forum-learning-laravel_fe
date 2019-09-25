@@ -56,27 +56,23 @@ export const getCurrentUser = () => {
 }
 
 export function getJwt() {
-  try {
-    const jwt = localStorage.getItem("jwt")
+  const jwt = localStorage.getItem("jwt")
 
-    if (jwt) return JSON.parse(jwt).type + " " + JSON.parse(jwt).token
+  if (jwt) return JSON.parse(jwt).type + " " + JSON.parse(jwt).token
 
-    return null
-  } catch (error) {
-    throw error
+  return null
+}
+
+const checkToken = service => {
+  let token = getJwt()
+
+  if (token) {
+    service.setAuthHeaders(token)
   }
 }
 
-// const checkToken = service => {
-//   let token = getJwt()
-
-//   if (token) {
-//     service.setAuthHeaders(token)
-//   }
-// }
-
 const authService = new AuthService()
 
-// checkToken(authService)
+checkToken(authService)
 
 export default authService
