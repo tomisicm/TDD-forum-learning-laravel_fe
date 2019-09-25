@@ -3,7 +3,7 @@ import http from "./http-service"
 // import jwtDecode from "jwt-decode"
 
 class AuthService {
-  async login(body) {
+  login(body) {
     return http
       .post("/api/login", body)
       .then(({ data }) => {
@@ -67,16 +67,16 @@ export function getJwt() {
   }
 }
 
-const checkToken = service => {
-  let token = getJwt()
+// const checkToken = service => {
+//   let token = getJwt()
 
-  if (token) {
-    service.setAuthHeaders(token)
-  }
-}
+//   if (token) {
+//     service.setAuthHeaders(token)
+//   }
+// }
 
 const authService = new AuthService()
 
-checkToken(authService)
+// checkToken(authService)
 
 export default authService
