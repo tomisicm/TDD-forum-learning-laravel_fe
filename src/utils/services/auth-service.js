@@ -45,7 +45,7 @@ export const setCurrentUser = user => {
   }
 }
 
-export const getCurrentUser = () => {
+export function getCurrentUserFromLS() {
   try {
     const user = localStorage.getItem("user")
 

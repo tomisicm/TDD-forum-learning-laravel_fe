@@ -1,8 +1,8 @@
 import { FETCH_CURRENT_USER } from "../constants"
-import { getCurrentUser } from "../../utils/services/auth-service"
+import { getCurrentUserFromLS } from "../../utils/services/auth-service"
 
 const initialState = {
-  user: getCurrentUser() || {}
+  user: getCurrentUserFromLS() || {}
 }
 
 function userReducer(state = initialState, action) {
