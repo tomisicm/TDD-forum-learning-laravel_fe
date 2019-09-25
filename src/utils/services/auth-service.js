@@ -4,10 +4,14 @@ import http from "./http-service"
 
 class AuthService {
   async login(body) {
-    const { data: jwt } = await http.post("/api/login", body)
-
-    localStorage.setItem("jwt", JSON.stringify(jwt))
-    // localStorage.setItem("user", JSON.stringify(jwtDecode(jwt.token)))
+    return http
+      .post("/api/login", body)
+      .then(response => {
+        this.loggingIn(response.data)
+      })
+      .catch(error => {
+        throw error
+      })
   }
 
   register(body) {
@@ -18,7 +22,14 @@ class AuthService {
     localStorage.removeItem("jwt")
   }
 
-  setAuthHeaders(token) {
+  loggingIn(data) {
+    localStorage.setItem("jwt", JSON.stringify(data))
+    this.setAuthHeaders()
+  }
+
+  setAuthHeaders() {
+    const token = getJwt()
+
     if (!token) {
       delete http.defaults.headers.common["Authorization"]
       return
@@ -27,11 +38,19 @@ class AuthService {
   }
 }
 
+export const setCurrentUser = user => {
+  try {
+    localStorage.setItem("user", JSON.stringify(user))
+  } catch (error) {
+    throw error
+  }
+}
+
 export const getCurrentUser = () => {
   try {
     const user = localStorage.getItem("user")
 
-    return user
+    return JSON.parse(user)
   } catch (error) {
     throw error
   }

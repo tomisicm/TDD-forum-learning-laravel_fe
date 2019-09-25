@@ -1,8 +1,14 @@
 import http from "./http-service"
 
+import { setCurrentUser } from "./auth-service"
+
 class UserService {
-  getCurrentUser() {
-    return http.get("/api/me")
+  async getCurrentUser() {
+    const { data } = await http.get("/api/me")
+
+    setCurrentUser(data)
+
+    return data
   }
 }
 

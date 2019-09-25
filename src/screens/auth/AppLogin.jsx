@@ -85,13 +85,11 @@ class Login extends Form {
         .then(this.props.fetchCurrentUser())
         .then(() => this.setState(() => ({ toDashboard: true })))
     } catch (e) {
-      if (e) {
-        const newError = e.response.data
+      const newError = e.response.data
 
-        const errors = { ...this.state.errors, email: newError }
+      const errors = { ...this.state.errors, email: newError }
 
-        this.setState({ errors })
-      }
+      this.setState({ errors })
     }
   }
 }
