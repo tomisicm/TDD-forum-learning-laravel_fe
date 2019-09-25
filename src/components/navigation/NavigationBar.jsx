@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
+import { Container, Nav, NavDropdown } from "react-bootstrap"
 
 import _ from "lodash"
 
@@ -25,35 +25,75 @@ const NavBar = ({ user }) => {
 
   return (
     <Container>
-      <Navbar bg="light" expand="lg">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="row w-100">
           <div className="col-2">
-            <NavLink className="navbar-brand" to="/dashboard">
+            <Link className="navbar-brand" to="/dashboard">
               Forum
-            </NavLink>
+            </Link>
           </div>
 
           <div className="col-8">
             <Nav className="mr-auto">
               <div className="row">
-                <NavDropdown title="Threads" className="col-4">
-                  <NavDropdown.Item>By me</NavDropdown.Item>
-                  <NavDropdown.Item>Unanswered</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item>My threads</NavDropdown.Item>
-                </NavDropdown>
-                <NavDropdown title="Channels" className="col-4">
-                  {channels &&
-                    channels.map(item => (
-                      <NavDropdown.Item
-                        key={item.name}
-                        href={`/channel/${item.name}/threads`}
-                      >
-                        {item.name}
-                      </NavDropdown.Item>
-                    ))}
-                </NavDropdown>
-                <Nav.Link className="col-4">New Thread</Nav.Link>
+                <li className="nav-item dropdown col-md-3">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Threads
+                  </Link>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <Link className="dropdown-item" href="#">
+                      By me
+                    </Link>
+                    <Link className="dropdown-item" href="#">
+                      Unanswered
+                    </Link>
+                    <div className="dropdown-divider"></div>
+                    <Link className="dropdown-item" href="#">
+                      My threads
+                    </Link>
+                  </div>
+                </li>
+
+                <li className="nav-item dropdown col-md-3">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Channels
+                  </Link>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    {channels &&
+                      channels.map(item => (
+                        <Link
+                          key={item.id}
+                          className="dropdown-item"
+                          to={`/channel/${item.name}/threads`}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link ml-2" to={`/threads/add`}>
+                    New Thread
+                  </Link>
+                </li>
               </div>
             </Nav>
           </div>
@@ -62,25 +102,21 @@ const NavBar = ({ user }) => {
               <NavDropdown title={user && user.email ? user.email : "Login"}>
                 {_.isEmpty(user) && (
                   <React.Fragment>
-                    <NavDropdown.Item href="/auth/login">
-                      Login
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="/auth/register">
-                      Register
-                    </NavDropdown.Item>
+                    <Link to="/auth/login">Login</Link>
+                    <Link to="/auth/register">Register</Link>
                   </React.Fragment>
                 )}
                 {!_.isEmpty(user) && (
                   <React.Fragment>
-                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                    <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+                    <Link to="/profile">Profile</Link>
+                    <Link to="/logout">Logout</Link>
                   </React.Fragment>
                 )}
               </NavDropdown>
             </Nav>
           </div>
         </div>
-      </Navbar>
+      </nav>
     </Container>
   )
 }
