@@ -1,16 +1,16 @@
 import React, { Component } from "react"
 
-import ThreadList from "../../components/thread/ThreadList"
-
 import threadService from "../../utils/services/thread-service"
 
-class ChannelThreads extends Component {
+import ThreadList from "../../components/thread/ThreadList"
+
+class Threads extends Component {
   state = {
     threads: []
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+    if (prevProps.location.search !== this.props.location.search) {
       threadService
         .getThreads(
           window.location.pathname.replace("/channel", "") +
@@ -25,4 +25,4 @@ class ChannelThreads extends Component {
   }
 }
 
-export default ChannelThreads
+export default Threads

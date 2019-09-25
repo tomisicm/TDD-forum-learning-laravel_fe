@@ -1,24 +1,11 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
-import threadService from "../../utils/services/thread-service"
-
 class Threads extends Component {
-  state = {
-    threads: []
-  }
-
-  componentDidMount() {
-    threadService
-      .getThreads(
-        window.location.pathname.replace("/channel", "") +
-          window.location.search
-      )
-      .then(({ data }) => this.setState({ threads: data }))
-  }
+  state = {}
 
   render() {
-    const { threads } = this.state
+    const { threads } = this.props
 
     return (
       <div className="container-fluid my-3">
