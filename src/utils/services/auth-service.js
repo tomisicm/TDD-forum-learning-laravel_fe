@@ -31,8 +31,7 @@ class AuthService {
     const token = getJwt()
 
     if (!token) {
-      delete http.defaults.headers.common["Authorization"]
-      return
+      return delete http.defaults.headers.common["Authorization"]
     }
     return (http.defaults.headers.common["Authorization"] = `${token}`)
   }
