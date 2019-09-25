@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
-import { Container, Nav, NavDropdown } from "react-bootstrap"
+import { Container, Nav } from "react-bootstrap"
 
 import _ from "lodash"
 
@@ -24,100 +24,112 @@ const NavBar = ({ user }) => {
   const { channels } = state
 
   return (
-    <Container>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="row w-100">
-          <div className="col-2">
-            <Link className="navbar-brand" to="/dashboard">
-              Forum
-            </Link>
-          </div>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="row">
+        <div className="col-md-2 col-lg-2">
+          <Link className="navbar-brand" to="/dashboard">
+            Forum
+          </Link>
+        </div>
 
-          <div className="col-8">
-            <Nav className="mr-auto">
-              <div className="row">
-                <li className="nav-item dropdown col-md-3">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Threads
+        <div className="col-md-7 col-lg-8">
+          <Nav className="mr-auto">
+            <div className="row">
+              <li className="nav-item dropdown col-md-3">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Threads
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link className="dropdown-item" href="#">
+                    Unanswered
                   </Link>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <Link className="dropdown-item" href="#">
-                      By me
-                    </Link>
-                    <Link className="dropdown-item" href="#">
-                      Unanswered
-                    </Link>
-                    <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item" href="#">
-                      My threads
-                    </Link>
-                  </div>
-                </li>
+                  {_.isEmpty(user) && (
+                    <React.Fragment>
+                      <div className="dropdown-divider"></div>
+                      <Link className="dropdown-item" href="#">
+                        My threads
+                      </Link>
+                    </React.Fragment>
+                  )}
+                </div>
+              </li>
 
-                <li className="nav-item dropdown col-md-3">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Channels
-                  </Link>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    {channels &&
-                      channels.map(item => (
-                        <Link
-                          key={item.id}
-                          className="dropdown-item"
-                          to={`/channel/${item.name}/threads`}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                  </div>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link ml-2" to={`/threads/add`}>
-                    New Thread
-                  </Link>
-                </li>
-              </div>
-            </Nav>
-          </div>
-          <div className="col-2">
-            <Nav className="justify-content-end">
-              <NavDropdown title={user && user.email ? user.email : "Login"}>
+              <li className="nav-item dropdown col-md-3">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Channels
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {channels &&
+                    channels.map(item => (
+                      <Link
+                        key={item.id}
+                        className="dropdown-item"
+                        to={`/channel/${item.name}/threads`}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                </div>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link ml-2" to={`/threads/add`}>
+                  New Thread
+                </Link>
+              </li>
+            </div>
+          </Nav>
+        </div>
+        <div className="col-md-3 col-lg-2">
+          <Nav className="justify-content-end">
+            <li className="nav-item dropdown col-md-3">
+              <Link
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {user && user.email ? user.email : "Login"}
+              </Link>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {_.isEmpty(user) && (
                   <React.Fragment>
-                    <Link to="/auth/login">Login</Link>
-                    <Link to="/auth/register">Register</Link>
+                    <Link to="/auth/login" className="dropdown-item">
+                      Login
+                    </Link>
+                    <Link to="/auth/register" className="dropdown-item">
+                      Register
+                    </Link>
                   </React.Fragment>
                 )}
                 {!_.isEmpty(user) && (
                   <React.Fragment>
-                    <Link to="/profile">Profile</Link>
-                    <Link to="/logout">Logout</Link>
+                    <Link to="/profile" className="dropdown-item">
+                      Profile
+                    </Link>
+                    <Link to="/logout" className="dropdown-item">
+                      Logout
+                    </Link>
                   </React.Fragment>
                 )}
-              </NavDropdown>
-            </Nav>
-          </div>
+              </div>
+            </li>
+          </Nav>
         </div>
-      </nav>
-    </Container>
+      </div>
+    </nav>
   )
 }
 
