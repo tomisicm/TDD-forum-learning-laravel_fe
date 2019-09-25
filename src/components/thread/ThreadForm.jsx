@@ -1,7 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
+import { connect } from "react-redux"
+
 import Form from "../../components/common/Form"
+// import BaseInput from "./../../components/common/Input"
+
+const mapStateToProps = state => {
+  return { user: state.user }
+}
 
 class ThreadForm extends Form {
   state = {
@@ -40,7 +47,7 @@ class ThreadForm extends Form {
                 {!formEditState && <span>Title: {thread.title}</span>}
                 {formEditState && <div>INSERT INPUT</div>}
               </div>
-              {/* TODO: Remove current user is user */}
+
               {thread.creator && (
                 <div className="col">
                   <Link to={`/profile/${thread.creator.name}`}>
@@ -103,4 +110,4 @@ class ThreadForm extends Form {
   }
 }
 
-export default ThreadForm
+export default connect(mapStateToProps)(ThreadForm)
