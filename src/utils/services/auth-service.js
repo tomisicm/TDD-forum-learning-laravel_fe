@@ -37,7 +37,7 @@ class AuthService {
   }
 }
 
-export const setCurrentUser = user => {
+export const setCurrentUserToLS = user => {
   try {
     localStorage.setItem("user", JSON.stringify(user))
   } catch (error) {
