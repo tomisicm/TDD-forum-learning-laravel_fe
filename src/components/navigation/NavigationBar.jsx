@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
-import { Container, Nav } from "react-bootstrap"
+import { Nav } from "react-bootstrap"
 
 import _ from "lodash"
 
@@ -36,23 +36,31 @@ const NavBar = ({ user }) => {
           <Nav className="mr-auto">
             <div className="row">
               <li className="nav-item dropdown col-md-3">
+                {/* TODO: Find alternative for Link */}
                 <Link
                   className="nav-link dropdown-toggle"
                   role="button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
+                  to={""}
                 >
                   Threads
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <Link className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to={`/threads?replied=0`}>
                     Unanswered
                   </Link>
-                  {_.isEmpty(user) && (
+                  <Link className="dropdown-item" to={`/threads?popular=1`}>
+                    Popular
+                  </Link>
+                  {!_.isEmpty(user) && (
                     <React.Fragment>
                       <div className="dropdown-divider"></div>
-                      <Link className="dropdown-item" href="#">
+                      <Link
+                        className="dropdown-item"
+                        to={`/threads?by=${user.name}`}
+                      >
                         My threads
                       </Link>
                     </React.Fragment>
@@ -67,6 +75,7 @@ const NavBar = ({ user }) => {
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
+                  to={""}
                 >
                   Channels
                 </Link>
@@ -100,6 +109,7 @@ const NavBar = ({ user }) => {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                to={""}
               >
                 {user && user.email ? user.email : "Login"}
               </Link>
