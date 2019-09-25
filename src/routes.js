@@ -12,11 +12,11 @@ import AddThread from "./screens/thread/AddThread"
 
 import Profile from "./screens/profile/Profile"
 
-const Routes = () => {
+export const Routes = () => {
   return (
     <main className="container">
       <Switch>
-        <Route exec path="/">
+        <Route exact path="/">
           <Redirect to="/dashboard"></Redirect>
         </Route>
         <Route exact path="/auth/register" component={AppRegister} />
@@ -30,5 +30,3 @@ const Routes = () => {
     </main>
   )
 }
-
-export default Routes

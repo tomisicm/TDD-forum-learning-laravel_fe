@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import NavigationBar from "./components/navigation/NavigationBar"
 
-import Routes from "./Routes"
+import { Routes } from "./routes"
 
 import "./App.css"
 
