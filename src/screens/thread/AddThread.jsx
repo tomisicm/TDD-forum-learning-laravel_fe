@@ -13,10 +13,30 @@ class AddThread extends Component {
     }
   }
 
-  handleUpdateThread = evt => {
-    const thread = Object.assign({}, { body: evt.target.value })
+  handleUpdateThreadBody = evt => {
+    const body = evt.target.value
+      .toString()
+      .trimLeft()
+      .trimRight()
+      .replace(/&nbsp;/g, " ")
+      .replace(/&nbsp;&nbsp;/g, " ")
 
-    this.setState({ ...this.state, thread: thread })
+    const thread = {
+      ...this.state.thread,
+      body: body
+    }
+
+    this.setState({ thread: thread })
+  }
+
+  handleUpdateThreadTitle = evt => {
+    console.log(evt.target.value)
+    const thread = {
+      ...this.state.thread,
+      title: evt.target.value.toString().replace(/&nbsnbsp;/g, "")
+    }
+
+    this.setState({ thread: thread })
   }
 
   render() {
@@ -29,7 +49,8 @@ class AddThread extends Component {
           <ThreadForm
             thread={thread}
             formEditState={true}
-            handleUpdateThread={this.handleUpdateThread}
+            handleUpdateThreadBody={this.handleUpdateThreadBody}
+            handleUpdateThreadTitle={this.handleUpdateThreadTitle}
           />
         </div>
       </div>

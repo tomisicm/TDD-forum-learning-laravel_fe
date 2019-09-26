@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
 import Form from "../../components/common/Form"
-// import BaseInput from "./../../components/common/Input"
+import BaseInput from "./../../components/common/Input"
 import ContentEditable from "react-contenteditable"
 
 const mapStateToProps = state => {
@@ -37,7 +37,11 @@ class ThreadForm extends Form {
   }
 
   render() {
-    const { thread, handleUpdateThread } = this.props
+    const {
+      thread,
+      handleUpdateThreadBody,
+      handleUpdateThreadTitle
+    } = this.props
     const { formEditState } = this.state
 
     return (
@@ -49,7 +53,13 @@ class ThreadForm extends Form {
                 {!formEditState && <span>Title: {thread.title}</span>}
                 {formEditState && (
                   <div>
-                    {/* <BaseInput name="title" label="Title:" classes="ml-3" /> */}
+                    <BaseInput
+                      name="title"
+                      value={thread.title}
+                      onChange={handleUpdateThreadTitle}
+                      label="Title:"
+                      classes="ml-3"
+                    />
                   </div>
                 )}
               </div>
@@ -72,7 +82,7 @@ class ThreadForm extends Form {
                 <ContentEditable
                   html={thread.body}
                   disabled={false}
-                  onChange={handleUpdateThread}
+                  onChange={handleUpdateThreadBody}
                 />
               </div>
             )}
