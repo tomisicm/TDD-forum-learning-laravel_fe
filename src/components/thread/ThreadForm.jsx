@@ -1,19 +1,22 @@
-import React from "react"
+import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 import { connect } from "react-redux"
 
-import Form from "../../components/common/Form"
 import BaseInput from "./../../components/common/Input"
 import ContentEditable from "react-contenteditable"
+
+import threadService from "../../utils/services/thread-service"
 
 const mapStateToProps = state => {
   return { user: state.user }
 }
 
-class ThreadForm extends Form {
+class ThreadForm extends Component {
   state = {
-    formEditState: this.props.formEditState
+    formEditState: this.props.formEditState,
+
+    errors: {}
   }
 
   static defaultProps = {
@@ -29,11 +32,13 @@ class ThreadForm extends Form {
   }
 
   handleSave() {
+    threadService
+      .saveThread({ ...this.props.thread })
+      .then(({ data }) => console.log(data))
     // async call
     // if new object then redirect on view page
     // otherviwe user is already on the /threads/:id page
-
-    this.toggleEditState()
+    // this.toggleEditState()
   }
 
   render() {
@@ -42,7 +47,8 @@ class ThreadForm extends Form {
       handleUpdateThreadBody,
       handleUpdateThreadTitle
     } = this.props
-    const { formEditState } = this.state
+
+    const { errors, formEditState } = this.state
 
     return (
       <React.Fragment>
@@ -59,6 +65,7 @@ class ThreadForm extends Form {
                       onChange={handleUpdateThreadTitle}
                       label="Title:"
                       classes="ml-3"
+                      error={errors.title}
                     />
                   </div>
                 )}
@@ -84,6 +91,7 @@ class ThreadForm extends Form {
                   disabled={false}
                   onChange={handleUpdateThreadBody}
                 />
+                {errors.body && errors.body.toString()}
               </div>
             )}
           </div>
