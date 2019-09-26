@@ -6,8 +6,19 @@ import ThreadForm from "../../components/thread/ThreadForm"
 
 class AddThread extends Component {
   state = {
-    thread: {}
+    thread: {
+      title: "",
+      body: "",
+      channel_id: null
+    }
   }
+
+  handleUpdateThread = evt => {
+    console.log(evt.target.value)
+
+    // this.setState({ ...this.state, thread: evt.target.value })
+  }
+
   render() {
     const { thread } = this.state
 
@@ -15,7 +26,11 @@ class AddThread extends Component {
       <div className="container-fluid my-3">
         add new thread
         <div className="row">
-          <ThreadForm thread={thread} formEditState={true} />
+          <ThreadForm
+            thread={thread}
+            formEditState={true}
+            handleUpdateThread={this.handleUpdateThread}
+          />
         </div>
       </div>
     )

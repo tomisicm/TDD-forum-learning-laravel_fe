@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
 import Form from "../../components/common/Form"
-import BaseInput from "./../../components/common/Input"
+// import BaseInput from "./../../components/common/Input"
+import ContentEditable from "react-contenteditable"
 
 const mapStateToProps = state => {
   return { user: state.user }
@@ -31,11 +32,12 @@ class ThreadForm extends Form {
     // async call
     // if new object then redirect on view page
     // otherviwe user is already on the /threads/:id page
+
     this.toggleEditState()
   }
 
   render() {
-    const { thread } = this.props
+    const { thread, handleUpdateThread } = this.props
     const { formEditState } = this.state
 
     return (
@@ -47,7 +49,7 @@ class ThreadForm extends Form {
                 {!formEditState && <span>Title: {thread.title}</span>}
                 {formEditState && (
                   <div>
-                    <BaseInput name="title" label="Title:" classes="ml-3" />
+                    {/* <BaseInput name="title" label="Title:" classes="ml-3" /> */}
                   </div>
                 )}
               </div>
@@ -65,7 +67,15 @@ class ThreadForm extends Form {
             {!formEditState && (
               <div className="card-text my-3">{thread.body}</div>
             )}
-            {formEditState && <div>INSERT TEXTAREA</div>}
+            {formEditState && (
+              <div>
+                <ContentEditable
+                  html={thread.body}
+                  disabled={false}
+                  onChange={evt => handleUpdateThread(evt)}
+                />
+              </div>
+            )}
           </div>
           <div className="card-footer">
             <div className="row text-muted">
