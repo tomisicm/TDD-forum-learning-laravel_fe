@@ -72,7 +72,7 @@ class ThreadForm extends Form {
                 <ContentEditable
                   html={thread.body}
                   disabled={false}
-                  onChange={evt => handleUpdateThread(evt)}
+                  onChange={handleUpdateThread}
                 />
               </div>
             )}

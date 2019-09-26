@@ -14,9 +14,9 @@ class AddThread extends Component {
   }
 
   handleUpdateThread = evt => {
-    console.log(evt.target.value)
+    const thread = Object.assign({}, { body: evt.target.value })
 
-    // this.setState({ ...this.state, thread: evt.target.value })
+    this.setState({ ...this.state, thread: thread })
   }
 
   render() {
