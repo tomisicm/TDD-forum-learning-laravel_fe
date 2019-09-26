@@ -30,7 +30,6 @@ class AddThread extends Component {
   }
 
   handleUpdateThreadTitle = evt => {
-    console.log(evt.target.value)
     const thread = {
       ...this.state.thread,
       title: evt.target.value.toString().replace(/&nbsnbsp;/g, "")
