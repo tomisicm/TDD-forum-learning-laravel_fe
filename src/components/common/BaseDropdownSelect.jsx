@@ -1,7 +1,7 @@
 import React from "react"
 
 const BaseDropdownSelect = props => {
-  const { defaultOption, options, handleSelectOption } = props
+  const { defaultOption, options, handleSelectOption, trackBy } = props
 
   return (
     <div className="btn-group dropdown">
@@ -19,6 +19,7 @@ const BaseDropdownSelect = props => {
           <li
             className="dropdown-item"
             onClick={e => handleSelectOption(e)}
+            value={option[trackBy]}
             key={option.id}
           >
             {option.name}
@@ -27,6 +28,10 @@ const BaseDropdownSelect = props => {
       </div>
     </div>
   )
+}
+
+BaseDropdownSelect.defaultProps = {
+  trackBy: "id"
 }
 
 export default BaseDropdownSelect
