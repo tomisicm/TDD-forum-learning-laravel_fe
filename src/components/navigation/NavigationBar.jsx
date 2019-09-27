@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
@@ -6,24 +6,29 @@ import { Nav } from "react-bootstrap"
 
 import _ from "lodash"
 
-import channelsService from "../../utils/services/channels-service"
+// import channelsService from "../../utils/services/channels-service"
+
+import { fetchChannels } from "../../redux/actions/channelAction"
 
 const mapStateToProps = state => {
-  return { userReducer: state.userReducer }
+  return {
+    userReducer: state.userReducer,
+    channelReducer: state.channelReducer
+  }
 }
 
-const NavBar = ({ userReducer }) => {
-  const [state, setChannels] = useState({ channels: [] })
+const mapDispatchToProps = {
+  fetchChannels
+}
 
-  useEffect(() => {
-    channelsService.getChannels().then(({ data }) => {
-      setChannels({ channels: data })
-    })
-  }, [])
+const NavBar = props => {
+  // useMemo(() => {
+  //   props.fetchChannels()
+  // }, [props])
 
   // destructuring
-  const { user } = userReducer
-  const { channels } = state
+  const { user } = props.userReducer
+  const channels = props.channelReducer.channels || []
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -145,6 +150,9 @@ const NavBar = ({ userReducer }) => {
   )
 }
 
-const NavigationBar = connect(mapStateToProps)(NavBar)
+const NavigationBar = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar)
 
 export default NavigationBar
