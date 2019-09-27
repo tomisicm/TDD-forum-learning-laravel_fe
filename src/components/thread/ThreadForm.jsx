@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 
 import { connect } from "react-redux"
 
@@ -37,12 +37,11 @@ class ThreadForm extends Component {
   }
 
   handleSave() {
-    threadService
-      .saveThread({ ...this.props.thread })
-      .then(({ data }) => console.log(data))
-    // async call
-    // if new object then redirect on view page
+    threadService.saveThread({ ...this.props.thread }).then(data => {
+      this.props.history.push(`/threads/${data.id}`)
+    })
     // otherviwe user is already on the /threads/:id page
+    // update state
     // this.toggleEditState()
   }
 
@@ -167,4 +166,4 @@ class ThreadForm extends Component {
   }
 }
 
-export default connect(mapStateToProps)(ThreadForm)
+export default withRouter(connect(mapStateToProps)(ThreadForm))
