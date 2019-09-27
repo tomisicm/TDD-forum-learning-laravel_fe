@@ -129,7 +129,7 @@ const NavBar = ({ user }) => {
                     <Link to="/profile" className="dropdown-item">
                       Profile
                     </Link>
-                    <Link to="/logout" className="dropdown-item">
+                    <Link to="/auth/logout" className="dropdown-item">
                       Logout
                     </Link>
                   </React.Fragment>

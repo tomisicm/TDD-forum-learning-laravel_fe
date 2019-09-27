@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom"
 
 import AppRegister from "./screens/auth/AppRegister"
 import AppLogin from "./screens/auth/AppLogin"
+import AppLogout from "./screens/auth/AppLogout"
 
 import ChannelThreads from "./screens/thread/ChannelThreads"
 import Threads from "./screens/thread/Threads"
@@ -21,6 +22,7 @@ export const Routes = () => {
         </Route>
         <Route exact path="/auth/register" component={AppRegister} />
         <Route exact path="/auth/login" component={AppLogin} />
+        <Route exact path="/auth/logout" component={AppLogout} />
         <Route path="/profile/:profile" component={Profile} />
 
         <Route path="/channel/:channel/threads" component={ChannelThreads} />

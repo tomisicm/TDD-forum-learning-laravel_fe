@@ -20,6 +20,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("jwt")
+    localStorage.removeItem("user")
   }
 
   loggingIn(data) {
