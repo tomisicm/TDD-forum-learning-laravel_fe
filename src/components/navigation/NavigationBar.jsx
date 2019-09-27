@@ -9,10 +9,10 @@ import _ from "lodash"
 import channelsService from "../../utils/services/channels-service"
 
 const mapStateToProps = state => {
-  return { user: state.user }
+  return { userReducer: state.userReducer }
 }
 
-const NavBar = ({ user }) => {
+const NavBar = ({ userReducer }) => {
   const [state, setChannels] = useState({ channels: [] })
 
   useEffect(() => {
@@ -21,6 +21,8 @@ const NavBar = ({ user }) => {
     })
   }, [])
 
+  // destructuring
+  const { user } = userReducer
   const { channels } = state
 
   return (
