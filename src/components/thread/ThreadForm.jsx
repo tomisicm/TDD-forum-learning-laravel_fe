@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 
 import BaseInput from "./../../components/common/Input"
+import BaseDropdownSelect from "./../../components/common/BaseDropdownSelect"
+
 import ContentEditable from "react-contenteditable"
 
 import threadService from "../../utils/services/thread-service"
@@ -85,14 +87,26 @@ class ThreadForm extends Component {
               <div className="card-text my-3">{thread.body}</div>
             )}
             {formEditState && (
-              <div>
-                <ContentEditable
-                  html={thread.body}
-                  disabled={false}
-                  onChange={handleUpdateThreadBody}
-                />
-                {errors.body && errors.body.toString()}
-              </div>
+              <React.Fragment>
+                <div className="ml-1 my-4 row">
+                  <div className="col-md-2 mt-1">Channel:</div>
+                  <div className="col-md-2">
+                    <BaseDropdownSelect></BaseDropdownSelect>
+                  </div>
+                </div>
+
+                <div className="ml-1 my-4 row">
+                  <div className="col-md-2 mt-1">Content:</div>
+                  <div className="col mt-1 w-100">
+                    <ContentEditable
+                      html={thread.body}
+                      disabled={false}
+                      onChange={handleUpdateThreadBody}
+                    />
+                    {errors.body && errors.body.toString()}
+                  </div>
+                </div>
+              </React.Fragment>
             )}
           </div>
           <div className="card-footer">

@@ -22,7 +22,7 @@ class ThreadService {
 
   createThread(thread) {
     return http
-      .post(`/api/threads`, thread)
+      .post(`/api/${thread.channel}/threads`, thread)
       .then(({ data }) => {
         return data
       })

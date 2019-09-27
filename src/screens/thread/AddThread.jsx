@@ -9,7 +9,8 @@ class AddThread extends Component {
     thread: {
       title: "",
       body: "",
-      channel_id: null
+      channel_id: null,
+      channel: "v"
     }
   }
 
