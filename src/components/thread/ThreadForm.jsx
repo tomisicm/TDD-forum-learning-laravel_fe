@@ -53,7 +53,8 @@ class ThreadForm extends Component {
     const {
       thread,
       handleUpdateThreadBody,
-      handleUpdateThreadTitle
+      handleUpdateThreadTitle,
+      handleSelectChannel
     } = this.props
 
     const { errors, formEditState } = this.state
@@ -97,7 +98,11 @@ class ThreadForm extends Component {
                 <div className="ml-1 my-4 row">
                   <div className="col-md-2 mt-1">Channel:</div>
                   <div className="col-md-2">
-                    <BaseDropdownSelect options={channels} />
+                    <BaseDropdownSelect
+                      defaultOption="Thread Channel"
+                      options={channels}
+                      handleSelectOption={handleSelectChannel}
+                    />
                   </div>
                 </div>
 

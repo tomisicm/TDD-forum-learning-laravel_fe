@@ -10,8 +10,18 @@ class AddThread extends Component {
       title: "",
       body: "",
       channel_id: null,
-      channel: "v"
+      channel: {}
     }
+  }
+
+  handleUpdateChannel = (option, m) => {
+    const thread = Object.assign(this.state.thread, {
+      channel_id: option.id
+    })
+
+    Object.assign(thread.channel, option)
+
+    this.setState({ thread })
   }
 
   handleUpdateThreadBody = evt => {
@@ -49,6 +59,7 @@ class AddThread extends Component {
           <ThreadForm
             thread={thread}
             formEditState={true}
+            handleSelectChannel={this.handleUpdateChannel}
             handleUpdateThreadBody={this.handleUpdateThreadBody}
             handleUpdateThreadTitle={this.handleUpdateThreadTitle}
           />

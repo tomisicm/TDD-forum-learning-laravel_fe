@@ -24,7 +24,7 @@ const BaseDropdownSelect = props => {
         {options.map(option => (
           <li
             className="dropdown-item"
-            onClick={e => handleSelectOption(e)}
+            onClick={e => handleSelectOption(option, e)}
             value={option[trackBy]}
             key={option.id}
           >

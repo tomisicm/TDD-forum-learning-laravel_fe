@@ -9,9 +9,9 @@ class ThreadService {
     return http.get(`/api${channel}`)
   }
 
-  editThread(id, body) {
+  editThread(id, thread) {
     return http
-      .put(`/api/threads/${id}`, body)
+      .put(`/api/threads/${id}`, thread)
       .then(({ data }) => {
         return data
       })
@@ -20,9 +20,9 @@ class ThreadService {
       })
   }
 
-  createThread(thread) {
+  createThread(thread, channel) {
     return http
-      .post(`/api/${thread.channel}/threads`, thread)
+      .post(`/api/${channel}/threads`, thread)
       .then(({ data }) => {
         return data
       })
@@ -32,10 +32,12 @@ class ThreadService {
   }
 
   saveThread(thread) {
+    const channel = thread.channel.name
+
     if (thread.id) {
-      return this.editThread(thread)
+      return this.editThread(thread.id, thread)
     } else {
-      return this.createThread(thread)
+      return this.createThread(thread, channel)
     }
   }
 }
