@@ -11,7 +11,10 @@ import ContentEditable from "react-contenteditable"
 import threadService from "../../utils/services/thread-service"
 
 const mapStateToProps = state => {
-  return { user: state.user }
+  return {
+    userReducer: state.userReducer,
+    channelReducer: state.channelReducer
+  }
 }
 
 class ThreadForm extends Component {
@@ -44,6 +47,9 @@ class ThreadForm extends Component {
   }
 
   render() {
+    const { user } = this.props.userReducer
+    const { channels } = this.props.channelReducer
+
     const {
       thread,
       handleUpdateThreadBody,
@@ -91,7 +97,7 @@ class ThreadForm extends Component {
                 <div className="ml-1 my-4 row">
                   <div className="col-md-2 mt-1">Channel:</div>
                   <div className="col-md-2">
-                    <BaseDropdownSelect></BaseDropdownSelect>
+                    <BaseDropdownSelect options={channels} />
                   </div>
                 </div>
 

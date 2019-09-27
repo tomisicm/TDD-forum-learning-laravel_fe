@@ -1,6 +1,6 @@
 import React from "react"
 
-const BaseDropdownSelect = () => {
+const BaseDropdownSelect = ({ options }) => {
   return (
     <div className="btn-group dropdown">
       <button
@@ -10,11 +10,12 @@ const BaseDropdownSelect = () => {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Dropup
+        Thread Channel
       </button>
       <div className="dropdown-menu">
-        <div className="dropdown-item">Action</div>
-        <div className="dropdown-item">Action 2</div>
+        {options.map(option => (
+          <div className="dropdown-item">{option.name}</div>
+        ))}
       </div>
     </div>
   )
