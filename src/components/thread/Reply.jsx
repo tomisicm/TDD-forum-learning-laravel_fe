@@ -34,8 +34,7 @@ class Reply extends Component {
   }
 
   handleSave() {
-    // TODO:
-    console.log(repliesService.editReply(this.props.reply))
+    repliesService.editReply(this.state.reply)
     this.toggleEditState()
   }
 
