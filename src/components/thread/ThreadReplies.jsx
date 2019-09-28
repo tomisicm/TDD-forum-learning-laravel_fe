@@ -55,7 +55,7 @@ class ThreadReplies extends Component {
 
   render() {
     const { replies, newReply } = this.state
-    const currentUser = this.props.userReducer
+    const currentUser = this.props.userReducer.user
 
     return (
       <React.Fragment>

@@ -25,15 +25,15 @@ class Reply extends Form {
   }
 
   isEditable() {
-    return true
+    return this.props.reply.user_id === this.props.currentUser.id
   }
 
   isDeletable() {
-    return false
+    return this.props.reply.user_id === this.props.currentUser.id
   }
 
   render() {
-    const { reply, user } = this.props
+    const { reply, currentUser } = this.props
     const { formEditState } = this.state
 
     return (
@@ -51,51 +51,39 @@ class Reply extends Form {
           <div className="card-body" style={{ padding: "0.5rem" }}>
             <div className="card-text">{reply.body}</div>
           </div>
-          {user && (
+          {currentUser && (
             <div className="card-footer">
-              {!formEditState && (
-                <React.Fragment>
+              <div className="row text-muted">
+                {!formEditState && (
+                  <React.Fragment>
+                    {this.isEditable() && (
+                      <button
+                        onClick={() => this.toggleEditState()}
+                        type="button"
+                        className="btn-sm btn-primary mx-2"
+                      >
+                        Edit
+                      </button>
+                    )}
+                    {this.isDeletable() && (
+                      <button type="button" className="btn-sm btn-danger mx-2">
+                        Delete
+                      </button>
+                    )}
+                  </React.Fragment>
+                )}
+                {formEditState && (
                   <button
-                    onClick={() => this.toggleEditState()}
+                    onClick={() => this.handleSave()}
                     type="button"
-                    className="btn-sm btn-primary mx-2"
+                    className="btn-sm btn-success mx-2"
                   >
-                    Edit
+                    Save
                   </button>
-                  <button type="button" className="btn-sm btn-danger mx-2">
-                    Delete
-                  </button>
-                </React.Fragment>
-              )}
-              {formEditState && (
-                <button
-                  onClick={() => this.handleSave()}
-                  type="button"
-                  className="btn-sm btn-success mx-2"
-                >
-                  Save
-                </button>
-              )}
+                )}
+              </div>
             </div>
           )}
-          <div className="card-footer">
-            <div className="row text-muted">
-              <button
-                onClick={() => this.toggleEditState()}
-                type="button"
-                className="btn-sm btn-primary mx-2"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => this.handleDelete()}
-                type="button"
-                className="btn-sm btn-danger mx-2"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
         </div>
       </React.Fragment>
     )
