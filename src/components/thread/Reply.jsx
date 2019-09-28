@@ -20,6 +20,10 @@ class Reply extends Component {
     this.setState({ formEditState: !this.state.formEditState })
   }
 
+  updateReply = ({ target }) => {
+    console.log(target)
+  }
+
   handleDelete() {
     console.log(this.props.thread.id)
   }
@@ -63,7 +67,16 @@ class Reply extends Component {
           <div className="card-body" style={{ padding: "0.5rem" }}>
             <div className="card-text">
               {!formEditState && <div>{reply.body}</div>}
-              {formEditState && <div>BaseTextarea</div>}
+              {formEditState && (
+                <div>
+                  <BaseTextarea
+                    value={reply.body}
+                    onChange={this.updateReply}
+                    name={"reply"}
+                    className="w-100"
+                  />
+                </div>
+              )}
             </div>
           </div>
 
