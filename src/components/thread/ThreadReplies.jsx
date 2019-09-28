@@ -8,6 +8,9 @@ class ThreadReplies extends Component {
   state = {
     replies: {
       data: []
+    },
+    newReply: {
+      body: ""
     }
   }
 
@@ -19,15 +22,23 @@ class ThreadReplies extends Component {
     }
   }
 
-  addNewReply(reply) {
+  createReplyHandler = reply => {
     repliesService.createReply(this.props.threadId, reply).then(
       ({ data }) => console.log(data)
       // this.setState({ replies: data })
     )
   }
 
+  updateNewReply = ({ target }) => {
+    this.setState({
+      [target.name]: {
+        body: target.value
+      }
+    })
+  }
+
   render() {
-    const { replies } = this.state
+    const { replies, newReply } = this.state
 
     return (
       <React.Fragment>
@@ -38,7 +49,12 @@ class ThreadReplies extends Component {
             ))}
         </div>
         <div>
-          <AddThreadReply />
+          <AddThreadReply
+            reply={newReply}
+            createReplyHandler={this.createReplyHandler}
+            updateNewReply={this.updateNewReply}
+            name={"newReply"}
+          />
         </div>
       </React.Fragment>
     )
