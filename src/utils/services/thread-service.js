@@ -5,8 +5,8 @@ class ThreadService {
     return http.get(`/api${channel}`)
   }
 
-  getThread(channel, id) {
-    return http.get(`/api${channel}`)
+  getThread(id) {
+    return http.get(`/api/threads/${id}`)
   }
 
   editThread(id, thread) {

@@ -11,8 +11,10 @@ class Thread extends Component {
   }
 
   componentDidMount() {
+    const { match } = this.props
+
     threadService
-      .getThread(window.location.pathname)
+      .getThread(match.params.thread)
       .then(({ data }) => this.setState({ thread: data }))
   }
 
