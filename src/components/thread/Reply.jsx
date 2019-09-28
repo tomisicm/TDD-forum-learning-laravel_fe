@@ -39,7 +39,7 @@ class Reply extends Form {
   }
 
   render() {
-    const { reply, currentUser } = this.props
+    const { reply } = this.props
     const { formEditState } = this.state
 
     return (
