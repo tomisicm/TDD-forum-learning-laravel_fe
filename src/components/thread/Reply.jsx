@@ -13,9 +13,9 @@ class Reply extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.reply !== prevProps.reply) {
-      this.setState({ reply: this.props.reply })
+  static getDerivedStateFromProps(props, state) {
+    if (props.reply !== state.reply) {
+      return { reply: { ...props.reply } }
     }
   }
 
@@ -24,13 +24,15 @@ class Reply extends Component {
   }
 
   updateReply = ({ target }) => {
+    console.log(target.value)
     this.setState({
       [target.name]: { body: target.value }
     })
   }
 
   handleDelete() {
-    console.log(this.props.thread.id)
+    console.log(this.props)
+    // repliesService.deleteReply(this.props.reply)
   }
 
   handleSave() {
@@ -53,7 +55,7 @@ class Reply extends Component {
   }
 
   render() {
-    const { reply } = this.props
+    const { reply } = this.state
     const { formEditState } = this.state
 
     return (
@@ -99,7 +101,11 @@ class Reply extends Component {
                       </button>
                     )}
                     {this.isDeletable() && (
-                      <button type="button" className="btn-sm btn-danger mx-2">
+                      <button
+                        onClick={this.handleDelete}
+                        type="button"
+                        className="btn-sm btn-danger mx-2"
+                      >
                         Delete
                       </button>
                     )}
@@ -107,13 +113,22 @@ class Reply extends Component {
                 )}
 
                 {formEditState && (
-                  <button
-                    onClick={() => this.handleSave()}
-                    type="button"
-                    className="btn-sm btn-success mx-2"
-                  >
-                    Save
-                  </button>
+                  <React.Fragment>
+                    <button
+                      onClick={() => this.handleSave()}
+                      type="button"
+                      className="btn-sm btn-success mx-2"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => this.handleCancel()}
+                      type="button"
+                      className="btn-sm btn-info mx-2"
+                    >
+                      Cancel
+                    </button>
+                  </React.Fragment>
                 )}
               </div>
             </div>

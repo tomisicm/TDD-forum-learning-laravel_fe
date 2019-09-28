@@ -13,6 +13,10 @@ class RepliesService {
     return http.put(`/api/replies/${reply.id}`, reply)
   }
 
+  deleteReply(reply) {
+    return http.delete(`/api/replies/${reply.id}`)
+  }
+
   // saveReply(reply) {
   //   const replyId = reply.id
   //   return http.put(`/api/replies/${replyId}`, reply)
