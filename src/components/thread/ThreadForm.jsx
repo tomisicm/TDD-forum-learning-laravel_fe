@@ -21,6 +21,7 @@ class ThreadForm extends Component {
   state = {
     formEditState: this.props.formEditState,
     thread: { ...this.props.thread },
+    selectedOption: {},
     errors: {}
   }
 
@@ -28,6 +29,7 @@ class ThreadForm extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.thread !== prevProps.thread) {
       this.setState({ thread: this.props.thread })
+      this.setState({ selectedOption: this.props.thread.channel })
     }
   }
 
@@ -91,9 +93,7 @@ class ThreadForm extends Component {
     const { user } = this.props.userReducer
     const { channels } = this.props.channelReducer
 
-    const { errors, thread, formEditState } = this.state
-    const selectedOption = this.thread && this.thread.channel // depends on this thread
-    console.log(selectedOption)
+    const { errors, thread, formEditState, selectedOption } = this.state
 
     return (
       <div className="card my-2 w-100" key={thread.id}>
