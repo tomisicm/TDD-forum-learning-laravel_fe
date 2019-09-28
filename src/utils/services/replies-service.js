@@ -6,7 +6,7 @@ class RepliesService {
   }
 
   createReply(threadId, body) {
-    return http.post(`/api${threadId}`, body)
+    return http.post(`/api/threads/${threadId}/replies`, body)
   }
 
   editReply(replyId, body) {
