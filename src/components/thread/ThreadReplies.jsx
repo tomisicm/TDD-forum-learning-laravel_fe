@@ -1,8 +1,15 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 
 import ThreadReply from "../../components/thread/Reply"
 import AddThreadReply from "../../components/thread/AddReply"
 import repliesService from "../../utils/services/replies-service"
+
+const mapStateToProps = state => {
+  return {
+    userReducer: state.userReducer
+  }
+}
 
 class ThreadReplies extends Component {
   state = {
@@ -35,7 +42,6 @@ class ThreadReplies extends Component {
             body: ""
           }
         }))
-        console.log(this.state)
       })
   }
 
@@ -49,13 +55,18 @@ class ThreadReplies extends Component {
 
   render() {
     const { replies, newReply } = this.state
+    const currentUser = this.props.userReducer
 
     return (
       <React.Fragment>
         <div>
           {replies.data &&
             replies.data.map(reply => (
-              <ThreadReply key={reply.id} reply={reply} />
+              <ThreadReply
+                key={reply.id}
+                reply={reply}
+                currentUser={currentUser}
+              />
             ))}
         </div>
         <div>
@@ -71,4 +82,7 @@ class ThreadReplies extends Component {
   }
 }
 
-export default ThreadReplies
+export default connect(
+  mapStateToProps,
+  null
+)(ThreadReplies)

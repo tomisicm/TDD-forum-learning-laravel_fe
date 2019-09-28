@@ -24,6 +24,14 @@ class Reply extends Form {
     this.toggleEditState()
   }
 
+  isEditable() {
+    return true
+  }
+
+  isDeletable() {
+    return false
+  }
+
   render() {
     const { reply, user } = this.props
     const { formEditState } = this.state
@@ -70,6 +78,24 @@ class Reply extends Form {
               )}
             </div>
           )}
+          <div className="card-footer">
+            <div className="row text-muted">
+              <button
+                onClick={() => this.toggleEditState()}
+                type="button"
+                className="btn-sm btn-primary mx-2"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => this.handleDelete()}
+                type="button"
+                className="btn-sm btn-danger mx-2"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     )
