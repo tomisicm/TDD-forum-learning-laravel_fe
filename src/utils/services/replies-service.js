@@ -1,8 +1,8 @@
 import http from "./http-service"
 
 class RepliesService {
-  getReplies(thread) {
-    return http.get(`/api${thread}`)
+  getRepliesForThread(thread) {
+    return http.get(`/api/threads/${thread}/replies`)
   }
 
   createReply(threadId, body) {

@@ -30,7 +30,7 @@ class Thread extends Component {
           )}
 
           <div className="mx-2">
-            {thread.replies && <ThreadReplies replies={thread.replies} />}
+            {thread.replies && <ThreadReplies threadId={thread.id} />}
           </div>
         </div>
       </div>
