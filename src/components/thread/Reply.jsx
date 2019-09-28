@@ -58,38 +58,40 @@ class Reply extends Form {
             <div className="card-text">{reply.body}</div>
           </div>
 
-          <div className="card-footer">
-            <div className="row text-muted">
-              {!formEditState && (
-                <React.Fragment>
-                  {this.isEditable() && (
-                    <button
-                      onClick={() => this.toggleEditState()}
-                      type="button"
-                      className="btn-sm btn-primary mx-2"
-                    >
-                      Edit
-                    </button>
-                  )}
-                  {this.isDeletable() && (
-                    <button type="button" className="btn-sm btn-danger mx-2">
-                      Delete
-                    </button>
-                  )}
-                </React.Fragment>
-              )}
+          {(this.isDeletable() || this.isEditable()) && (
+            <div className="card-footer">
+              <div className="row text-muted">
+                {!formEditState && (
+                  <React.Fragment>
+                    {this.isEditable() && (
+                      <button
+                        onClick={() => this.toggleEditState()}
+                        type="button"
+                        className="btn-sm btn-primary mx-2"
+                      >
+                        Edit
+                      </button>
+                    )}
+                    {this.isDeletable() && (
+                      <button type="button" className="btn-sm btn-danger mx-2">
+                        Delete
+                      </button>
+                    )}
+                  </React.Fragment>
+                )}
 
-              {formEditState && (
-                <button
-                  onClick={() => this.handleSave()}
-                  type="button"
-                  className="btn-sm btn-success mx-2"
-                >
-                  Save
-                </button>
-              )}
+                {formEditState && (
+                  <button
+                    onClick={() => this.handleSave()}
+                    type="button"
+                    className="btn-sm btn-success mx-2"
+                  >
+                    Save
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </React.Fragment>
     )
