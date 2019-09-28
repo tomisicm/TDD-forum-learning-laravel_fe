@@ -7,7 +7,10 @@ import BaseTextarea from "../../components/common/BaseTextarea"
 class Reply extends Component {
   state = {
     formEditState: false,
-    reply: {}
+    reply: {
+      body: "",
+      creator: {}
+    }
   }
 
   componentDidUpdate(prevProps) {
