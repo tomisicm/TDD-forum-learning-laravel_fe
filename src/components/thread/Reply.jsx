@@ -20,7 +20,7 @@ class Reply extends Form {
 
   handleSave() {
     // TODO:
-    console.log(repliesService)
+    console.log(repliesService.editReply(this.props.reply))
     this.toggleEditState()
   }
 
@@ -55,7 +55,10 @@ class Reply extends Form {
             </div>
           </div>
           <div className="card-body" style={{ padding: "0.5rem" }}>
-            <div className="card-text">{reply.body}</div>
+            <div className="card-text">
+              {!formEditState && <div>{reply.body}</div>}
+              {formEditState && <div>input</div>}
+            </div>
           </div>
 
           {(this.isDeletable() || this.isEditable()) && (
