@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link, withRouter } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { connect } from "react-redux"
 
@@ -20,8 +20,15 @@ const mapStateToProps = state => {
 class ThreadForm extends Component {
   state = {
     formEditState: this.props.formEditState,
-
+    thread: { ...this.props.thread },
     errors: {}
+  }
+
+  // TODO: this is most likely hack. figure out a way without Redux
+  componentDidUpdate(prevProps) {
+    if (this.props.thread !== prevProps.thread) {
+      this.setState({ thread: this.props.thread })
+    }
   }
 
   static defaultProps = {
@@ -36,28 +43,57 @@ class ThreadForm extends Component {
     console.log(this.props.thread.id)
   }
 
+  handleUpdateChannel = (option, m) => {
+    const thread = Object.assign(this.state.thread, {
+      channel_id: option.id
+    })
+
+    Object.assign(thread.channel, option)
+
+    this.setState({ thread })
+  }
+
+  handleUpdateThreadBody = evt => {
+    const body = evt.target.value
+      .toString()
+      .trimLeft()
+      .trimRight()
+      .replace(/&nbsp;/g, " ")
+      .replace(/&nbsp;&nbsp;/g, " ")
+
+    const thread = {
+      ...this.state.thread,
+      body: body
+    }
+
+    this.setState({ thread: thread })
+  }
+
+  handleUpdateThreadTitle = evt => {
+    const thread = {
+      ...this.state.thread,
+      title: evt.target.value.toString().replace(/&nbsnbsp;/g, "")
+    }
+
+    this.setState({ thread: thread })
+  }
+
   handleSave() {
-    threadService.saveThread({ ...this.props.thread }).then(data => {
+    threadService.saveThread({ ...this.state.thread }).then(data => {
       this.props.history.push(`/threads/${data.id}`)
     })
     // otherviwe user is already on the /threads/:id page
     // update state
-    // this.toggleEditState()
+    this.toggleEditState()
   }
 
   render() {
     const { user } = this.props.userReducer
     const { channels } = this.props.channelReducer
 
-    const {
-      thread,
-      handleUpdateThreadBody,
-      handleUpdateThreadTitle,
-      selectedOption,
-      handleSelectChannel
-    } = this.props
-
-    const { errors, formEditState } = this.state
+    const { errors, thread, formEditState } = this.state
+    const selectedOption = this.thread && this.thread.channel // depends on this thread
+    console.log(selectedOption)
 
     return (
       <div className="card my-2 w-100" key={thread.id}>
@@ -70,7 +106,7 @@ class ThreadForm extends Component {
                   <BaseInput
                     name="title"
                     value={thread.title}
-                    onChange={handleUpdateThreadTitle}
+                    onChange={this.handleUpdateThreadTitle}
                     label="Title:"
                     classes="ml-3"
                     error={errors.title}
@@ -97,7 +133,7 @@ class ThreadForm extends Component {
               <BaseDropdownSelect
                 selectedOption={selectedOption || "Thread Channel"}
                 options={channels}
-                handleSelectOption={handleSelectChannel}
+                handleSelectOption={this.handleUpdateChannel}
               />
 
               <div className="ml-1 my-4 row">
@@ -106,7 +142,7 @@ class ThreadForm extends Component {
                   <ContentEditable
                     html={thread.body}
                     disabled={false}
-                    onChange={handleUpdateThreadBody}
+                    onChange={this.handleUpdateThreadBody}
                   />
                   {errors.body && errors.body.toString()}
                 </div>
@@ -158,4 +194,4 @@ class ThreadForm extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(ThreadForm))
+export default connect(mapStateToProps)(ThreadForm)

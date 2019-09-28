@@ -19,12 +19,15 @@ class Thread extends Component {
   }
 
   render() {
+    const { history } = this.props
     const { thread } = this.state
 
     return (
       <div>
         <div className="container-fluid my-3">
-          {thread && <ThreadForm thread={thread}></ThreadForm>}
+          {thread && (
+            <ThreadForm thread={thread} history={history}></ThreadForm>
+          )}
 
           <div className="mx-2">
             {thread.replies && <ThreadReplies replies={thread.replies} />}
