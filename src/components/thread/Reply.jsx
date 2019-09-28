@@ -53,8 +53,8 @@ class Reply extends Form {
           </div>
           {currentUser && (
             <div className="card-footer">
-              <div className="row text-muted">
-                {!formEditState && (
+              {!formEditState && (
+                <div className="row text-muted">
                   <React.Fragment>
                     {this.isEditable() && (
                       <button
@@ -71,17 +71,18 @@ class Reply extends Form {
                       </button>
                     )}
                   </React.Fragment>
-                )}
-                {formEditState && (
-                  <button
-                    onClick={() => this.handleSave()}
-                    type="button"
-                    className="btn-sm btn-success mx-2"
-                  >
-                    Save
-                  </button>
-                )}
-              </div>
+
+                  {formEditState && (
+                    <button
+                      onClick={() => this.handleSave()}
+                      type="button"
+                      className="btn-sm btn-success mx-2"
+                    >
+                      Save
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
