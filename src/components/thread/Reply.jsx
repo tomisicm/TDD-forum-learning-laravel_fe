@@ -21,7 +21,9 @@ class Reply extends Component {
   }
 
   updateReply = ({ target }) => {
-    console.log(target)
+    this.setState({
+      [target.name]: { body: target.value }
+    })
   }
 
   handleDelete() {
