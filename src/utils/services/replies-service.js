@@ -9,8 +9,8 @@ class RepliesService {
     return http.post(`/api/threads/${threadId}/replies`, body)
   }
 
-  editReply(replyId, body) {
-    return http.post(`/api/replies/${replyId}`, body)
+  editReply(reply) {
+    return http.put(`/api/replies/${reply.id}`, reply)
   }
 
   // saveReply(reply) {

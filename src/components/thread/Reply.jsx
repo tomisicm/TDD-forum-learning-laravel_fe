@@ -1,13 +1,19 @@
-import React from "react"
+import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 import repliesService from "../../utils/services/replies-service"
+import BaseTextarea from "../../components/common/BaseTextarea"
 
-import Form from "../../components/common/Form"
-
-class Reply extends Form {
+class Reply extends Component {
   state = {
-    formEditState: false
+    formEditState: false,
+    reply: {}
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.reply !== prevProps.reply) {
+      this.setState({ reply: this.props.thread })
+    }
   }
 
   toggleEditState() {
@@ -57,7 +63,7 @@ class Reply extends Form {
           <div className="card-body" style={{ padding: "0.5rem" }}>
             <div className="card-text">
               {!formEditState && <div>{reply.body}</div>}
-              {formEditState && <div>input</div>}
+              {formEditState && <div>BaseTextarea</div>}
             </div>
           </div>
 
