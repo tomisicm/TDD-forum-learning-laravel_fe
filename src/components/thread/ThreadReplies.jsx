@@ -26,12 +26,16 @@ class ThreadReplies extends Component {
     repliesService
       .createReply(this.props.threadId, this.state.newReply)
       .then(({ data }) => {
-        console.log(data)
-        this.setState({
+        this.setState(({ replies }) => ({
+          replies: {
+            ...replies,
+            data: [...replies.data, data]
+          },
           newReply: {
             body: ""
           }
-        })
+        }))
+        console.log(this.state)
       })
   }
 
