@@ -12,7 +12,7 @@ class Reply extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.reply !== prevProps.reply) {
-      this.setState({ reply: this.props.thread })
+      this.setState({ reply: this.props.reply })
     }
   }
 
