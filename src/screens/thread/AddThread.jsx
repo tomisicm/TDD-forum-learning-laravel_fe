@@ -59,6 +59,7 @@ class AddThread extends Component {
           <ThreadForm
             thread={thread}
             formEditState={true}
+            selectedOption={thread.channel}
             handleSelectChannel={this.handleUpdateChannel}
             handleUpdateThreadBody={this.handleUpdateThreadBody}
             handleUpdateThreadTitle={this.handleUpdateThreadTitle}

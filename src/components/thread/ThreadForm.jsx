@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom"
 
 import { connect } from "react-redux"
 
-import BaseInput from "./../../components/common/Input"
+import BaseInput from "./../../components/common/BaseInput"
 import BaseDropdownSelect from "./../../components/common/BaseDropdownSelect"
 
 import ContentEditable from "react-contenteditable"
@@ -53,115 +53,107 @@ class ThreadForm extends Component {
       thread,
       handleUpdateThreadBody,
       handleUpdateThreadTitle,
+      selectedOption,
       handleSelectChannel
     } = this.props
 
     const { errors, formEditState } = this.state
 
     return (
-      <React.Fragment>
-        <div className="card my-2 w-100" key={thread.id}>
-          <div className="card-header">
-            <div className="row justify-content">
-              <div className="col-md-8">
-                {!formEditState && <span>Title: {thread.title}</span>}
-                {formEditState && (
-                  <div>
-                    <BaseInput
-                      name="title"
-                      value={thread.title}
-                      onChange={handleUpdateThreadTitle}
-                      label="Title:"
-                      classes="ml-3"
-                      error={errors.title}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {thread.creator && (
-                <div className="col">
-                  <Link to={`/profile/${thread.creator.name}`}>
-                    Author: {thread.creator.name}
-                  </Link>
+      <div className="card my-2 w-100" key={thread.id}>
+        <div className="card-header">
+          <div className="row justify-content">
+            <div className="col-md-8">
+              {!formEditState && <span>Title: {thread.title}</span>}
+              {formEditState && (
+                <div>
+                  <BaseInput
+                    name="title"
+                    value={thread.title}
+                    onChange={handleUpdateThreadTitle}
+                    label="Title:"
+                    classes="ml-3"
+                    error={errors.title}
+                  />
                 </div>
               )}
             </div>
-          </div>
-          <div className="card-body" style={{ padding: "0.5rem" }}>
-            {!formEditState && (
-              <div className="card-text my-3">{thread.body}</div>
-            )}
-            {formEditState && (
-              <React.Fragment>
-                <div className="ml-1 my-4 row">
-                  <div className="col-md-2 mt-1">Channel:</div>
-                  <div className="col-md-2">
-                    <BaseDropdownSelect
-                      defaultOption="Thread Channel"
-                      options={channels}
-                      handleSelectOption={handleSelectChannel}
-                    />
-                  </div>
-                </div>
 
-                <div className="ml-1 my-4 row">
-                  <div className="col-md-2 mt-1">Content:</div>
-                  <div className="col mt-1 w-100">
-                    <ContentEditable
-                      html={thread.body}
-                      disabled={false}
-                      onChange={handleUpdateThreadBody}
-                    />
-                    {errors.body && errors.body.toString()}
-                  </div>
-                </div>
-              </React.Fragment>
+            {thread.creator && (
+              <div className="col">
+                <Link to={`/profile/${thread.creator.name}`}>
+                  Author: {thread.creator.name}
+                </Link>
+              </div>
             )}
           </div>
-          <div className="card-footer">
-            <div className="row text-muted">
-              <div className="col-md-4">
-                Total replies: {thread.replies_count}
-              </div>
-              <div className="col mr-auto">
-                Last Update: {thread.updated_at}
-              </div>
-              {/* TODO: Remove if user not current user*/}
-              <div className="col-auto">
-                {!formEditState && (
-                  <React.Fragment>
-                    <button
-                      onClick={() => this.toggleEditState()}
-                      type="button"
-                      className="btn btn-primary mx-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => this.handleDelete()}
-                      type="button"
-                      className="btn btn-danger mx-2"
-                    >
-                      Delete
-                    </button>
-                  </React.Fragment>
-                )}
+        </div>
+        <div className="card-body" style={{ padding: "0.5rem" }}>
+          {!formEditState && (
+            <div className="card-text my-3">{thread.body}</div>
+          )}
+          {formEditState && (
+            <React.Fragment>
+              <BaseDropdownSelect
+                selectedOption={selectedOption || "Thread Channel"}
+                options={channels}
+                handleSelectOption={handleSelectChannel}
+              />
 
-                {formEditState && (
+              <div className="ml-1 my-4 row">
+                <div className="col-md-2 mt-1">Content:</div>
+                <div className="col mt-1 w-100">
+                  <ContentEditable
+                    html={thread.body}
+                    disabled={false}
+                    onChange={handleUpdateThreadBody}
+                  />
+                  {errors.body && errors.body.toString()}
+                </div>
+              </div>
+            </React.Fragment>
+          )}
+        </div>
+        <div className="card-footer">
+          <div className="row text-muted">
+            <div className="col-md-4">
+              Total replies: {thread.replies_count}
+            </div>
+            <div className="col mr-auto">Last Update: {thread.updated_at}</div>
+            {/* TODO: Remove if user not current user*/}
+            <div className="col-auto">
+              {!formEditState && (
+                <React.Fragment>
                   <button
-                    onClick={() => this.handleSave()}
+                    onClick={() => this.toggleEditState()}
                     type="button"
-                    className="btn btn-success mx-2"
+                    className="btn btn-primary mx-2"
                   >
-                    Save
+                    Edit
                   </button>
-                )}
-              </div>
+                  <button
+                    onClick={() => this.handleDelete()}
+                    type="button"
+                    className="btn btn-danger mx-2"
+                  >
+                    Delete
+                  </button>
+                </React.Fragment>
+              )}
+
+              {formEditState && (
+                <button
+                  onClick={() => this.handleSave()}
+                  type="button"
+                  className="btn btn-success mx-2"
+                >
+                  Save
+                </button>
+              )}
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }
