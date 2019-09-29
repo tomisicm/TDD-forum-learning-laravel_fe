@@ -1,6 +1,7 @@
 import React from "react"
 
 import BaseTextarea from "../../components/common/BaseTextarea"
+import BaseButton from "../../components/common/BaseButton"
 
 const AddReply = props => {
   const user = {}
@@ -28,13 +29,11 @@ const AddReply = props => {
           </div>
           {user && (
             <div className="card-footer">
-              <button
+              <BaseButton
                 onClick={createReplyHandler}
-                type="button"
-                className="btn-sm btn-success mx-2"
-              >
-                Save
-              </button>
+                label={"save"}
+                classes="btn-sm btn-success mx-2"
+              />
             </div>
           )}
         </div>
