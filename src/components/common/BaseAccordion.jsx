@@ -17,7 +17,7 @@ const BaseAccordion = props => {
             <button
               className="btn btn-link"
               data-toggle="collapse"
-              data-target={createToggleLink("#", "collapseOne")}
+              data-target={createToggleLink("#", "collapse-" + index)}
               aria-expanded="true"
               aria-controls={"collapseOne"}
             >
@@ -27,7 +27,7 @@ const BaseAccordion = props => {
         </div>
 
         <div
-          id={createToggleLink(null, "collapseOne")}
+          id={createToggleLink(null, "collapse-" + index)}
           className="collapse show"
         >
           <div className="card-body">{content}</div>
