@@ -31,7 +31,7 @@ const AddReply = props => {
             <div className="card-footer">
               <BaseButton
                 onClick={createReplyHandler}
-                label={"save"}
+                label={"Save"}
                 classes="btn-sm btn-success mx-2"
               />
             </div>
