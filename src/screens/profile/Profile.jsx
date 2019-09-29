@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 
 import profileService from "../../utils/services/profile-service"
 
+import BaseAccordion from "../../components/common/BaseAccordion"
+
 class Profile extends Component {
   state = {
     profile: {},
@@ -34,19 +36,19 @@ class Profile extends Component {
             {activities &&
               Object.keys(activities).map(entry => (
                 <div key={entry}>
-                  {entry}
-
-                  {activities[entry].map(item => (
-                    <div className="ml-3" key={item.id}>
-                      - {item.type}{" "}
-                      {item.subject && (
-                        <Link to={`/threads/${item.subject.id}`}>
-                          {item.subject.title}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
-                  <hr />
+                  <BaseAccordion
+                    label={entry}
+                    content={activities[entry].map(item => (
+                      <div className="ml-3" key={item.id}>
+                        - {item.type}{" "}
+                        {item.subject && (
+                          <Link to={`/threads/${item.subject.id}`}>
+                            {item.subject.title}
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  />
                 </div>
               ))}
           </div>
