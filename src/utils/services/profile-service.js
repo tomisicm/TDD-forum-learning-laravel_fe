@@ -2,7 +2,7 @@ import http from "./http-service"
 
 class ProfileService {
   getUserProfile(name) {
-    return http.get(`/api${name}`)
+    return http.get(`/api/profile/${name}`)
   }
 }
 

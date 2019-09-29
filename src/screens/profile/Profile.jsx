@@ -6,15 +6,12 @@ import profileService from "../../utils/services/profile-service"
 class Profile extends Component {
   state = {
     profile: {},
-    activities: {}
+    activities: null
   }
 
   componentDidMount() {
     profileService
-      .getUserProfile(
-        window.location.pathname.replace("/channel", "") +
-          window.location.search
-      )
+      .getUserProfile(this.props.match.params.profile)
       .then(({ data }) =>
         this.setState({ profile: data.user, activities: data.activities })
       )
@@ -38,7 +35,7 @@ class Profile extends Component {
               Object.keys(activities).map(entry => (
                 <div key={entry}>
                   {entry}
-                  {/* TODO: entry is a collapse element */}
+
                   {activities[entry].map(item => (
                     <div className="ml-3" key={item.id}>
                       - {item.type}{" "}
