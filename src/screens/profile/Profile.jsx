@@ -39,9 +39,11 @@ class Profile extends Component {
                   {activities[entry].map(item => (
                     <div className="ml-3" key={item.id}>
                       - {item.type}{" "}
-                      <Link to={`/threads/${item.subject.id}`}>
-                        {item.subject.title}
-                      </Link>
+                      {item.subject && (
+                        <Link to={`/threads/${item.subject.id}`}>
+                          {item.subject.title}
+                        </Link>
+                      )}
                     </div>
                   ))}
                   <hr />
