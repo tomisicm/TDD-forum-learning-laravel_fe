@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
+import _ from "lodash"
+
 import ThreadReply from "../../components/thread/Reply"
 import AddThreadReply from "../../components/thread/AddReply"
 import repliesService from "../../utils/services/replies-service"
@@ -45,6 +47,22 @@ class ThreadReplies extends Component {
       })
   }
 
+  deleteReplyHandler = (e, reply) => {
+    repliesService
+      .deleteReply(reply)
+      .then(({ data }) => {
+        _.remove(this.state.replies.data, function(item) {
+          return item.id === reply.id
+        })
+        this.setState({
+          replies: { ...this.state.replies }
+        })
+      })
+      .catch(function(error) {
+        console.error(error)
+      })
+  }
+
   updateNewReply = ({ target }) => {
     this.setState({
       [target.name]: {
@@ -63,8 +81,9 @@ class ThreadReplies extends Component {
           {replies.data &&
             replies.data.map(reply => (
               <ThreadReply
-                key={reply.id}
                 reply={reply}
+                deleteReplyHandler={this.deleteReplyHandler}
+                key={reply.id}
                 currentUser={currentUser}
               />
             ))}

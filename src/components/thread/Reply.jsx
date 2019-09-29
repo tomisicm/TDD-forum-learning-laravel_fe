@@ -38,11 +38,6 @@ class Reply extends Component {
     })
   }
 
-  handleDelete() {
-    console.log(this.props)
-    // repliesService.deleteReply(this.props.reply)
-  }
-
   handleSave() {
     repliesService.editReply(this.state.reply)
     this.toggleEditState()
@@ -71,6 +66,7 @@ class Reply extends Component {
 
   render() {
     const { formEditState, reply } = this.state
+    const { deleteReplyHandler } = this.props
 
     return (
       <React.Fragment>
@@ -115,7 +111,7 @@ class Reply extends Component {
                       )}
                       {this.isDeletable() && (
                         <BaseButton
-                          onClick={this.handleDelete}
+                          onClick={e => deleteReplyHandler(e, reply)}
                           label={"Delete"}
                           classes="btn-sm btn-danger mx-2"
                         />
