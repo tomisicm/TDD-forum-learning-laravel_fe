@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 
 import BaseInput from "./../../components/common/BaseInput"
 import BaseDropdownSelect from "./../../components/common/BaseDropdownSelect"
+import BaseButton from "./../../components/common/BaseButton"
 
 import ContentEditable from "react-contenteditable"
 
@@ -160,31 +161,25 @@ class ThreadForm extends Component {
             <div className="col-auto">
               {!formEditState && (
                 <React.Fragment>
-                  <button
+                  <BaseButton
                     onClick={() => this.toggleEditState()}
-                    type="button"
-                    className="btn btn-primary mx-2"
-                  >
-                    Edit
-                  </button>
-                  <button
+                    label={"Edit"}
+                    classes="btn btn-primary mx-2"
+                  />
+                  <BaseButton
                     onClick={() => this.handleDelete()}
-                    type="button"
-                    className="btn btn-danger mx-2"
-                  >
-                    Delete
-                  </button>
+                    label={"Delete"}
+                    classes="btn btn-danger mx-2"
+                  />
                 </React.Fragment>
               )}
 
               {formEditState && (
-                <button
+                <BaseButton
                   onClick={() => this.handleSave()}
-                  type="button"
-                  className="btn btn-success mx-2"
-                >
-                  Save
-                </button>
+                  label={"Save"}
+                  classes="btn btn-success mx-2"
+                />
               )}
             </div>
           </div>
