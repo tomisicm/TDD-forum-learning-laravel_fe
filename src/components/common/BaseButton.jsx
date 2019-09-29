@@ -23,7 +23,7 @@ BaseButton.defaultProps = {
 }
 
 BaseButton.propTypes = {
-  onChange: propTypes.func.isRequired,
+  onClick: propTypes.func.isRequired,
   label: propTypes.string.isRequired
 }
 export default BaseButton
