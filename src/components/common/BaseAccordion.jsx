@@ -3,18 +3,22 @@ import React from "react"
 const BaseAccordion = props => {
   const { label, content } = props
 
+  function createToggleLink(char, id) {
+    if (char) return char + id
+    return id
+  }
+
   return (
-    <div class="accordion" id="accordionExample">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="mb-0">
+    <div className="accordion">
+      <div className="card">
+        <div className="card-header">
+          <h2 className="mb-0">
             <button
-              class="btn btn-link"
-              type="button"
+              className="btn btn-link"
               data-toggle="collapse"
-              data-target="#collapseOne"
+              data-target={createToggleLink("#", "collapseOne")}
               aria-expanded="true"
-              aria-controls="collapseOne"
+              aria-controls={"collapseOne"}
             >
               {label}
             </button>
@@ -22,11 +26,10 @@ const BaseAccordion = props => {
         </div>
 
         <div
-          id="collapseOne"
-          class="collapse show"
-          data-parent="#accordionExample"
+          id={createToggleLink(null, "collapseOne")}
+          className="collapse show"
         >
-          <div class="card-body">{content}</div>
+          <div className="card-body">{content}</div>
         </div>
       </div>
     </div>
