@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import repliesService from "../../utils/services/replies-service"
 import BaseTextarea from "../../components/common/BaseTextarea"
+import BaseButton from "../../components/common/BaseButton"
 
 class Reply extends Component {
   state = {
@@ -106,42 +107,34 @@ class Reply extends Component {
                   {!formEditState && (
                     <React.Fragment>
                       {this.isEditable() && (
-                        <button
+                        <BaseButton
                           onClick={() => this.toggleEditState()}
-                          type="button"
-                          className="btn-sm btn-primary mx-2"
-                        >
-                          Edit
-                        </button>
+                          label={"Edit"}
+                          classes="btn-sm btn-primary mx-2"
+                        />
                       )}
                       {this.isDeletable() && (
-                        <button
+                        <BaseButton
                           onClick={this.handleDelete}
-                          type="button"
-                          className="btn-sm btn-danger mx-2"
-                        >
-                          Delete
-                        </button>
+                          label={"Delete"}
+                          classes="btn-sm btn-danger mx-2"
+                        />
                       )}
                     </React.Fragment>
                   )}
 
                   {formEditState && (
                     <React.Fragment>
-                      <button
+                      <BaseButton
                         onClick={() => this.handleSave()}
-                        type="button"
-                        className="btn-sm btn-success mx-2"
-                      >
-                        Save
-                      </button>
-                      <button
+                        label={"Save"}
+                        classes="btn-sm btn-success mx-2"
+                      />
+                      <BaseButton
                         onClick={() => this.handleCancel()}
-                        type="button"
-                        className="btn-sm btn-info mx-2"
-                      >
-                        Cancel
-                      </button>
+                        label={"Cancel"}
+                        classes="btn-sm btn-info mx-2"
+                      />
                     </React.Fragment>
                   )}
                 </div>
