@@ -34,10 +34,11 @@ class Profile extends Component {
           <div className="card-body ml-2">
             <div className="row">Activities:</div>
             {activities &&
-              Object.keys(activities).map(entry => (
+              Object.keys(activities).map((entry, index) => (
                 <div key={entry}>
                   <BaseAccordion
                     label={entry}
+                    index={index}
                     content={activities[entry].map(item => (
                       <div className="ml-3" key={item.id}>
                         - {item.type}{" "}

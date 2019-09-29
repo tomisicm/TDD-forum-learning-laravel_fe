@@ -1,15 +1,16 @@
 import React from "react"
 
 const BaseAccordion = props => {
-  const { label, content } = props
+  const { label, content, index } = props
 
   function createToggleLink(char, id) {
-    if (char) return char + id
-    return id
+    if (char) return ("" + char + id).toString()
+    return id.toString()
   }
 
   return (
     <div className="accordion">
+      {console.log(typeof index)}
       <div className="card">
         <div className="card-header">
           <h2 className="mb-0">
