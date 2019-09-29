@@ -40,6 +40,13 @@ class Reply extends Component {
     this.toggleEditState()
   }
 
+  handleCancel() {
+    this.setState({
+      reply: { ...this.props.reply }
+    })
+    this.toggleEditState()
+  }
+
   isEditable() {
     return (
       this.props.currentUser &&
