@@ -106,11 +106,13 @@ class NavigationBar extends Component {
                       ))}
                   </div>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link ml-2" to={`/threads/add`}>
-                    New Thread
-                  </Link>
-                </li>
+                {!_.isEmpty(user) && (
+                  <li className="nav-item">
+                    <Link className="nav-link ml-2" to={`/threads/add`}>
+                      New Thread
+                    </Link>
+                  </li>
+                )}
               </div>
             </Nav>
           </div>
