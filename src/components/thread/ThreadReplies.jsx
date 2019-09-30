@@ -88,14 +88,16 @@ class ThreadReplies extends Component {
               />
             ))}
         </div>
-        <div>
-          <AddThreadReply
-            reply={newReply}
-            createReplyHandler={this.createReplyHandler}
-            updateNewReply={this.updateNewReply}
-            name={"newReply"}
-          />
-        </div>
+        {!_.isEmpty(currentUser) && (
+          <div>
+            <AddThreadReply
+              reply={newReply}
+              createReplyHandler={this.createReplyHandler}
+              updateNewReply={this.updateNewReply}
+              name={"newReply"}
+            />
+          </div>
+        )}
       </React.Fragment>
     )
   }
