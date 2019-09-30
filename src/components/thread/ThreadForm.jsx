@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
+import _ from "lodash"
+
 import { connect } from "react-redux"
 
 import BaseInput from "./../../components/common/BaseInput"
@@ -92,8 +94,13 @@ class ThreadForm extends Component {
     this.toggleEditState()
   }
 
-  handleSubscription() {
-    // subscriptionService.subscribe(this.state.thread.id)
+  handleSubscription = ({ target }) => {
+    // console.log(target)
+    subscriptionService.subscribe(this.state.thread.id).then(({ data }) => {
+      this.setState({
+        thread: { ...this.state.thread, isSubscribedTo: data[0] }
+      })
+    })
   }
 
   render() {
@@ -161,8 +168,9 @@ class ThreadForm extends Component {
             </div>
 
             <div className="col-md-2">
-              {user && (
+              {!_.isEmpty(user) && (
                 <BaseIcon
+                  onClick={this.handleSubscription}
                   classes={
                     thread.isSubscribedTo
                       ? "btn-sm btn-success"
@@ -182,30 +190,32 @@ class ThreadForm extends Component {
             </div>
             <div className="col mr-auto">Last Update: {thread.updated_at}</div>
             {/* TODO: Remove if user not current user*/}
-            <div className="col-auto">
-              {!formEditState && (
-                <React.Fragment>
-                  <BaseButton
-                    onClick={() => this.toggleEditState()}
-                    label={"Edit"}
-                    classes="btn btn-primary mx-2"
-                  />
-                  <BaseButton
-                    onClick={() => this.handleDelete()}
-                    label={"Delete"}
-                    classes="btn btn-danger mx-2"
-                  />
-                </React.Fragment>
-              )}
+            {!_.isEmpty(user) && (
+              <div className="col-auto">
+                {!formEditState && (
+                  <React.Fragment>
+                    <BaseButton
+                      onClick={() => this.toggleEditState()}
+                      label={"Edit"}
+                      classes="btn btn-primary mx-2"
+                    />
+                    <BaseButton
+                      onClick={() => this.handleDelete()}
+                      label={"Delete"}
+                      classes="btn btn-danger mx-2"
+                    />
+                  </React.Fragment>
+                )}
 
-              {formEditState && (
-                <BaseButton
-                  onClick={() => this.handleSave()}
-                  label={"Save"}
-                  classes="btn btn-success mx-2"
-                />
-              )}
-            </div>
+                {formEditState && (
+                  <BaseButton
+                    onClick={() => this.handleSave()}
+                    label={"Save"}
+                    classes="btn btn-success mx-2"
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
