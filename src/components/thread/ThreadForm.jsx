@@ -11,6 +11,7 @@ import BaseIcon from "./../../components/common/BaseIcon"
 import ContentEditable from "react-contenteditable"
 
 import threadService from "../../utils/services/thread-service"
+import subscriptionService from "../../utils/services/subscription-service"
 
 const mapStateToProps = state => {
   return {
@@ -89,6 +90,10 @@ class ThreadForm extends Component {
     // otherviwe user is already on the /threads/:id page
     // update state
     this.toggleEditState()
+  }
+
+  handleSubscription() {
+    // subscriptionService.subscribe(this.state.thread.id)
   }
 
   render() {
