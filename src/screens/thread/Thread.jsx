@@ -25,9 +25,11 @@ class Thread extends Component {
     return (
       <div>
         <div className="container-fluid my-3">
-          {thread && (
-            <ThreadForm thread={thread} history={history}></ThreadForm>
-          )}
+          <div className="row">
+            {thread && (
+              <ThreadForm thread={thread} history={history}></ThreadForm>
+            )}
+          </div>
 
           <div className="mx-2">
             <ThreadReplies threadId={thread.id} />

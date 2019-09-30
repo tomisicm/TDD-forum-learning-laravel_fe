@@ -4,8 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "./redux/store/index"
 
-// import $ from "jquery"
-// import Popper from "popper.js"
+import "font-awesome/css/font-awesome.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min"
 
 import "./index.css"

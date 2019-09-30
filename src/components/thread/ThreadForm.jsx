@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 import BaseInput from "./../../components/common/BaseInput"
 import BaseDropdownSelect from "./../../components/common/BaseDropdownSelect"
 import BaseButton from "./../../components/common/BaseButton"
+import BaseIcon from "./../../components/common/BaseIcon"
 
 import ContentEditable from "react-contenteditable"
 
@@ -126,30 +127,48 @@ class ThreadForm extends Component {
           </div>
         </div>
         <div className="card-body" style={{ padding: "0.5rem" }}>
-          {!formEditState && (
-            <div className="card-text my-3">{thread.body}</div>
-          )}
-          {formEditState && (
-            <React.Fragment>
-              <BaseDropdownSelect
-                selectedOption={selectedOption || "Thread Channel"}
-                options={channels}
-                handleSelectOption={this.handleUpdateChannel}
-              />
-
-              <div className="ml-1 my-4 row">
-                <div className="col-md-2 mt-1">Content:</div>
-                <div className="col mt-1 w-100">
-                  <ContentEditable
-                    html={thread.body}
-                    disabled={false}
-                    onChange={this.handleUpdateThreadBody}
+          <div className="row">
+            <div className="col-md-10">
+              {formEditState && (
+                <React.Fragment>
+                  <BaseDropdownSelect
+                    selectedOption={selectedOption || "Thread Channel"}
+                    options={channels}
+                    handleSelectOption={this.handleUpdateChannel}
                   />
-                  {errors.body && errors.body.toString()}
-                </div>
-              </div>
-            </React.Fragment>
-          )}
+
+                  <div className="row">
+                    <div className="col-md-2 mt-1">Content:</div>
+                    <div className="col mt-1 w-100">
+                      <ContentEditable
+                        html={thread.body}
+                        disabled={false}
+                        onChange={this.handleUpdateThreadBody}
+                      />
+                      {errors.body && errors.body.toString()}
+                    </div>
+                  </div>
+                </React.Fragment>
+              )}
+              {!formEditState && (
+                <div className="card-text my-3">{thread.body}</div>
+              )}
+            </div>
+
+            <div className="col-md-2">
+              {user && (
+                <BaseIcon
+                  classes={
+                    thread.isSubscribedTo
+                      ? "btn-sm btn-success"
+                      : "btn-sm btn-outline-success"
+                  }
+                >
+                  <i className="fa fa-bell rounded-sm"></i>
+                </BaseIcon>
+              )}
+            </div>
+          </div>
         </div>
         <div className="card-footer">
           <div className="row text-muted">
