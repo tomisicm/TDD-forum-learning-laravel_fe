@@ -1,9 +1,14 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
+import _ from "lodash"
+
 import repliesService from "../../utils/services/replies-service"
+import subscriptionService from "../../utils/services/subscription-service"
+
 import BaseTextarea from "../../components/common/BaseTextarea"
 import BaseButton from "../../components/common/BaseButton"
+import BaseIcon from "./../../components/common/BaseIcon"
 
 class Reply extends Component {
   state = {
@@ -25,6 +30,15 @@ class Reply extends Component {
 
   toggleEditState() {
     this.setState({ formEditState: !this.state.formEditState })
+  }
+
+  handleFavorite = () => {
+    subscriptionService.favorite(this.state.reply.id).then(({ data }) => {
+      // console.log(data)
+      this.setState({
+        reply: { ...this.state.reply, isFavorited: data[0] }
+      })
+    })
   }
 
   updateReply = ({ target }) => {
@@ -66,18 +80,34 @@ class Reply extends Component {
 
   render() {
     const { formEditState, reply } = this.state
-    const { deleteReplyHandler } = this.props
+    const { deleteReplyHandler, currentUser } = this.props
 
     return (
       <React.Fragment>
         {reply && (
           <div className="card my-2" key={reply.id}>
             <div className="card-header">
-              <div className="row justify-content">
-                <div className="col">
-                  <Link to={`/profile/${reply.creator.name}`}>
-                    {reply.creator.name}
-                  </Link>
+              <div className="justify-content">
+                <div className="row">
+                  <div className="col-sm-9 col-md-9">
+                    <Link to={`/profile/${reply.creator.name}`}>
+                      {reply.creator.name}
+                    </Link>
+                  </div>
+                  {!_.isEmpty(currentUser) && (
+                    <div className="col-sm-3 col-md-3">
+                      <BaseIcon
+                        onClick={this.handleFavorite}
+                        classes={
+                          reply.isFavorited
+                            ? "btn-sm btn-success"
+                            : "btn-sm btn-outline-success"
+                        }
+                      >
+                        <i className="fa fa-heart rounded-sm"></i>
+                      </BaseIcon>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

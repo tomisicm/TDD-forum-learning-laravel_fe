@@ -6,7 +6,7 @@ class SubscriptionService {
   }
 
   favorite(id) {
-    return http.post(`/api/threads/${id}/favorite`)
+    return http.post(`/api/replies/${id}/favorites`)
   }
 }
 
