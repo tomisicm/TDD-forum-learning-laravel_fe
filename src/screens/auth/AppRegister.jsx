@@ -43,7 +43,7 @@ class Register extends Form {
     const { data, errors } = this.state
 
     if (this.state.toLogin === true) {
-      return <Redirect to="/login" />
+      return <Redirect to="/auth/login" />
     }
 
     return (
