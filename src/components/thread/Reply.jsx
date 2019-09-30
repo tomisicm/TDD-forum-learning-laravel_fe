@@ -36,7 +36,13 @@ class Reply extends Component {
     subscriptionService.favorite(this.state.reply.id).then(({ data }) => {
       // console.log(data)
       this.setState({
-        reply: { ...this.state.reply, isFavorited: data[0] }
+        reply: {
+          ...this.state.reply,
+          isFavorited: data[0],
+          favorites_count: !!data[0]
+            ? this.state.reply.favorites_count + 1
+            : this.state.reply.favorites_count - 1
+        }
       })
     })
   }
@@ -106,6 +112,9 @@ class Reply extends Component {
                       >
                         <i className="fa fa-heart rounded-sm"></i>
                       </BaseIcon>
+                      <span className="ml-2">
+                        {reply.favorites_count} favorites
+                      </span>
                     </div>
                   )}
                 </div>
